@@ -51,5 +51,4 @@ The data structure and collection methodology are currently being developed.
 
 ## Repository
 
-Maintaine
-d by **Vulgarcin**.
+Maintained by **Vulgarcin**.

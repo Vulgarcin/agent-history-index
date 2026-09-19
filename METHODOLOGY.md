@@ -74,5 +74,4 @@ Future versions of the dataset may include additional provenance fields such as 
 
 ---
 
-**Methodology established: Septemb
-er 2026**
+**Methodology established: September 2026**

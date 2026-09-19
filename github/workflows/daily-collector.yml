@@ -1,6 +1,6 @@
 name: Daily MCP Registry Snapshot
 
-on:
+"on":
   workflow_dispatch:
   schedule:
     - cron: "23 7 * * *"

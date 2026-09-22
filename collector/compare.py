@@ -105,7 +105,6 @@ for name in common_names:
     )
 
 comparison_date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-
 output_file = CHANGES_DIR / f"changes-{comparison_date}.json"
 
 result = {

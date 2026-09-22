@@ -6,7 +6,7 @@ from pathlib import Path
 
 API_BASE = "https://registry.modelcontextprotocol.io/v0.1/servers"
 LIMIT = 100
-MAX_PAGES = 200
+MAX_PAGES = 500
 
 OUTPUT_DIR = Path("data/snapshots")
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)

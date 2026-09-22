@@ -18,6 +18,7 @@ headers = {"User-Agent": "Agent-History-Index/0.1"}
 
 all_servers = []
 cursor = None
+seen_cursors = set()
 pages_fetched = 0
 
 while True:
@@ -39,14 +40,28 @@ while True:
     all_servers.extend(servers)
     pages_fetched += 1
 
-    cursor = page.get("metadata", {}).get("nextCursor")
+    next_cursor = page.get("metadata", {}).get("nextCursor")
 
-    if not cursor:
+    print(
+        f"Page {pages_fetched}: "
+        f"{len(servers)} servers, "
+        f"nextCursor={next_cursor!r}"
+    )
+
+    if not next_cursor:
         break
+
+    if next_cursor in seen_cursors:
+        raise RuntimeError(
+            f"Pagination cursor repeated: {next_cursor!r}"
+        )
+
+    seen_cursors.add(next_cursor)
+    cursor = next_cursor
 
     if pages_fetched >= MAX_PAGES:
         raise RuntimeError(
-            f"Stopped after {MAX_PAGES} pages to avoid an infinite pagination loop."
+            f"Stopped after {MAX_PAGES} pages."
         )
 
 snapshot = {

@@ -3,7 +3,7 @@ name: Daily MCP Registry Snapshot
 "on":
   workflow_dispatch:
   schedule:
-    - cron: "23 7 * * *"
+    - cron: "35 17 * * *"
 
 permissions:
   contents: write

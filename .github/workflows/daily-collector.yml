@@ -27,6 +27,9 @@ jobs:
       - name: Compare snapshots
         run: python collector/compare.py
 
+      - name: Cleanup dry run
+        run: python collector/cleanup.py
+
       - name: Commit new snapshot
         run: |
           git config user.name "agent-history-index-bot"

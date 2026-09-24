@@ -64,9 +64,12 @@ for snapshot in snapshot_files:
         print(f"KEEP monthly checkpoint: {snapshot.name}")
         continue
 
-    snapshot.unlink()
+        snapshot.unlink()
 
-print(
-    f"DELETED: {snapshot.name} "
-    f"(comparison exists: {change_file.name})"
-)
+    print(
+        f"DELETED: {snapshot.name} "
+        f"(comparison exists: {change_file.name})"
+    )
+
+print()
+print("Cleanup complete.")

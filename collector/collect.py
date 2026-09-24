@@ -1,6 +1,7 @@
 import json
 import urllib.request
 import urllib.parse
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -78,10 +79,22 @@ snapshot = {
     },
 }
 
-with output_file.open("w", encoding="utf-8") as f:
-    json.dump(snapshot, f, indent=2, ensure_ascii=False)
+page = None
 
-print(
-    f"Snapshot saved to {output_file}: "
-    f"{len(all_servers)} servers across {pages_fetched} pages."
-)
+for attempt in range(1, 4):
+    try:
+        with urllib.request.urlopen(request, timeout=30) as response:
+            page = json.load(response)
+
+        break
+
+    except Exception as error:
+        print(
+            f"Request failed on attempt {attempt}/3: "
+            f"{error}"
+        )
+
+        if attempt == 3:
+            raise
+
+        time.sleep(5 * attempt)

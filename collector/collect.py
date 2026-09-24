@@ -34,7 +34,7 @@ while True:
     url = f"{API_BASE}?{urllib.parse.urlencode(params)}"
     request = urllib.request.Request(url, headers=headers)
 
-    with urllib.request.urlopen(request, timeout=30) as response:
+    with urllib.request.urlopen(request, timeout=60) as response:
         page = json.load(response)
 
     servers = page.get("servers", [])
@@ -81,7 +81,7 @@ snapshot = {
 
 page = None
 
-for attempt in range(1, 4):
+for attempt in range(1, 6):
     try:
         with urllib.request.urlopen(request, timeout=30) as response:
             page = json.load(response)

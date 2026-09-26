@@ -79,9 +79,9 @@ for index, snapshot in enumerate(snapshot_files):
     snapshot.unlink()
 
     print(
-        f"DELETED: {snapshot.name} "
-        f"(comparison exists: {comparison_file.name})"
-    )
+    f"KEEP historical snapshot: {snapshot.name} "
+    f"(comparison exists: {comparison_file.name})"
+)
 
 print()
 print("Cleanup complete.")

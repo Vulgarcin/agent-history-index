@@ -78,7 +78,10 @@ snapshot = {
         },
     },
 }
+with output_file.open("w", encoding="utf-8") as file:
+    json.dump(snapshot, file, ensure_ascii=False, indent=2)
 
+print(f"Snapshot saved to {output_file}")
 page = None
 
 for attempt in range(1, 6):

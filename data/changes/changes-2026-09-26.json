@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-26T01:08:23.216491+00:00",
+  "generated_at": "2026-09-26T01:12:37.450741+00:00",
   "previous_snapshot": "mcp-registry-2026-09-24.json",
   "current_snapshot": "mcp-registry-2026-09-26.json",
   "summary": {
@@ -7,9 +7,9 @@
     "current_count": 36130,
     "added": 712,
     "removed": 6,
-    "version_changed": 2432,
+    "version_changed": 2433,
     "status_changed": 10,
-    "changed_entries": 2442
+    "changed_entries": 2443
   },
   "changes": {
     "added": [
@@ -12026,13 +12026,13 @@
             "url": "https://github.com/amflimited/threadfox-lite",
             "source": "github"
           },
-          "version": "0.2.3",
+          "version": "0.2.4",
           "websiteUrl": "https://threadfox.vip",
           "packages": [
             {
               "registryType": "pypi",
               "identifier": "threadfox-lite",
-              "version": "0.2.3",
+              "version": "0.2.4",
               "runtimeHint": "uvx",
               "transport": {
                 "type": "stdio"
@@ -12040,8 +12040,8 @@
             },
             {
               "registryType": "mcpb",
-              "identifier": "https://github.com/amflimited/threadfox-lite/releases/download/v0.2.3/threadfox-lite-0.2.3.mcpb",
-              "fileSha256": "6f0f0b7137ee2141828799ea1a7c58080f280725c996bd914f8e0b716188fec7",
+              "identifier": "https://github.com/amflimited/threadfox-lite/releases/download/v0.2.4/threadfox-lite-0.2.4.mcpb",
+              "fileSha256": "f1ef5dd87a9f428256d25983907be986f573909106373497f6a24abd74fb2b27",
               "transport": {
                 "type": "stdio"
               }
@@ -12051,9 +12051,9 @@
         "_meta": {
           "io.modelcontextprotocol.registry/official": {
             "status": "active",
-            "statusChangedAt": "2026-09-25T18:13:42.740396Z",
-            "publishedAt": "2026-09-25T18:13:42.740396Z",
-            "updatedAt": "2026-09-25T18:13:42.740396Z",
+            "statusChangedAt": "2026-09-26T01:07:22.225877Z",
+            "publishedAt": "2026-09-26T01:07:22.225877Z",
+            "updatedAt": "2026-09-26T01:07:22.225877Z",
             "isLatest": true
           }
         }
@@ -26375,6 +26375,11 @@
         "name": "io.github.OrgMentem/zotio",
         "before": "0.27.0",
         "after": "0.28.0"
+      },
+      {
+        "name": "io.github.OrygnsCode/opa-mcp",
+        "before": "0.6.0",
+        "after": "0.7.0"
       },
       {
         "name": "io.github.OyadotAI/oya-browser",
@@ -72408,6 +72413,211 @@
               "statusChangedAt": "2026-09-24T13:43:38.752897Z",
               "publishedAt": "2026-09-24T13:43:38.752897Z",
               "updatedAt": "2026-09-24T13:43:38.752897Z",
+              "isLatest": true
+            }
+          }
+        }
+      },
+      {
+        "name": "io.github.OrygnsCode/opa-mcp",
+        "before": {
+          "server": {
+            "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+            "name": "io.github.OrygnsCode/opa-mcp",
+            "description": "Author, validate, debug, and explain OPA Rego policies through any MCP-compatible client.",
+            "title": "OPA MCP",
+            "repository": {
+              "url": "https://github.com/OrygnsCode/opa-mcp-server",
+              "source": "github"
+            },
+            "version": "0.6.0",
+            "websiteUrl": "https://orygn.tech",
+            "packages": [
+              {
+                "registryType": "npm",
+                "registryBaseUrl": "https://registry.npmjs.org",
+                "identifier": "@orygn/opa-mcp",
+                "version": "0.6.0",
+                "runtimeHint": "npx",
+                "transport": {
+                  "type": "stdio"
+                },
+                "environmentVariables": [
+                  {
+                    "description": "Base URL of a running OPA server. Required only for opa_* runtime tools, not for rego_* language tools.",
+                    "default": "http://localhost:8181",
+                    "name": "OPA_URL"
+                  },
+                  {
+                    "description": "Bearer token for OPA running with --authentication=token.",
+                    "isSecret": true,
+                    "name": "OPA_TOKEN"
+                  },
+                  {
+                    "description": "Path to the opa binary. Defaults to 'opa' on PATH.",
+                    "default": "opa",
+                    "name": "OPA_BINARY"
+                  },
+                  {
+                    "description": "Path to the regal binary (optional; used by rego_lint, rego_security_audit and rego_fix). Defaults to 'regal' on PATH.",
+                    "default": "regal",
+                    "name": "REGAL_BINARY"
+                  },
+                  {
+                    "description": "Path to the conftest binary (optional, used by conftest_* tools). Defaults to 'conftest' on PATH.",
+                    "default": "conftest",
+                    "name": "CONFTEST_BINARY"
+                  },
+                  {
+                    "description": "Comma-separated list of root directories tools may read/write. When unset, file-based tools refuse to access the disk.",
+                    "name": "OPA_MCP_ALLOWED_PATHS"
+                  },
+                  {
+                    "description": "GitHub personal access token with the \"gist\" scope. Required only for rego_playground_share.",
+                    "isSecret": true,
+                    "name": "GITHUB_TOKEN"
+                  }
+                ]
+              },
+              {
+                "registryType": "oci",
+                "identifier": "docker.io/orygn/opa-mcp:0.6.0",
+                "transport": {
+                  "type": "stdio"
+                },
+                "environmentVariables": [
+                  {
+                    "description": "Base URL of a running OPA server.",
+                    "default": "http://localhost:8181",
+                    "name": "OPA_URL"
+                  },
+                  {
+                    "description": "Bearer token for OPA authentication.",
+                    "isSecret": true,
+                    "name": "OPA_TOKEN"
+                  },
+                  {
+                    "description": "GitHub personal access token with the \"gist\" scope. Required only for rego_playground_share.",
+                    "isSecret": true,
+                    "name": "GITHUB_TOKEN"
+                  }
+                ]
+              }
+            ],
+            "_meta": {
+              "io.modelcontextprotocol.registry/publisher-provided": {
+                "tool": "manual",
+                "version": "0.6.0"
+              }
+            }
+          },
+          "_meta": {
+            "io.modelcontextprotocol.registry/official": {
+              "status": "active",
+              "statusChangedAt": "2026-09-07T16:26:05.594943Z",
+              "publishedAt": "2026-09-07T16:26:05.594943Z",
+              "updatedAt": "2026-09-07T16:26:05.594943Z",
+              "isLatest": true
+            }
+          }
+        },
+        "after": {
+          "server": {
+            "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+            "name": "io.github.OrygnsCode/opa-mcp",
+            "description": "Author, validate, debug, and explain OPA Rego policies through any MCP-compatible client.",
+            "title": "OPA MCP",
+            "repository": {
+              "url": "https://github.com/OrygnsCode/opa-mcp-server",
+              "source": "github"
+            },
+            "version": "0.7.0",
+            "websiteUrl": "https://orygn.tech",
+            "packages": [
+              {
+                "registryType": "npm",
+                "registryBaseUrl": "https://registry.npmjs.org",
+                "identifier": "@orygn/opa-mcp",
+                "version": "0.7.0",
+                "runtimeHint": "npx",
+                "transport": {
+                  "type": "stdio"
+                },
+                "environmentVariables": [
+                  {
+                    "description": "Base URL of a running OPA server. Required only for opa_* runtime tools, not for rego_* language tools.",
+                    "default": "http://localhost:8181",
+                    "name": "OPA_URL"
+                  },
+                  {
+                    "description": "Bearer token for OPA running with --authentication=token.",
+                    "isSecret": true,
+                    "name": "OPA_TOKEN"
+                  },
+                  {
+                    "description": "Path to the opa binary. Defaults to 'opa' on PATH.",
+                    "default": "opa",
+                    "name": "OPA_BINARY"
+                  },
+                  {
+                    "description": "Path to the regal binary (optional; used by rego_lint, rego_security_audit and rego_fix). Defaults to 'regal' on PATH.",
+                    "default": "regal",
+                    "name": "REGAL_BINARY"
+                  },
+                  {
+                    "description": "Path to the conftest binary (optional, used by conftest_* tools). Defaults to 'conftest' on PATH.",
+                    "default": "conftest",
+                    "name": "CONFTEST_BINARY"
+                  },
+                  {
+                    "description": "Comma-separated list of root directories tools may read/write. When unset, file-based tools refuse to access the disk.",
+                    "name": "OPA_MCP_ALLOWED_PATHS"
+                  },
+                  {
+                    "description": "GitHub personal access token with the \"gist\" scope. Required only for rego_playground_share.",
+                    "isSecret": true,
+                    "name": "GITHUB_TOKEN"
+                  }
+                ]
+              },
+              {
+                "registryType": "oci",
+                "identifier": "docker.io/orygn/opa-mcp:0.7.0",
+                "transport": {
+                  "type": "stdio"
+                },
+                "environmentVariables": [
+                  {
+                    "description": "Base URL of a running OPA server.",
+                    "default": "http://localhost:8181",
+                    "name": "OPA_URL"
+                  },
+                  {
+                    "description": "Bearer token for OPA authentication.",
+                    "isSecret": true,
+                    "name": "OPA_TOKEN"
+                  },
+                  {
+                    "description": "GitHub personal access token with the \"gist\" scope. Required only for rego_playground_share.",
+                    "isSecret": true,
+                    "name": "GITHUB_TOKEN"
+                  }
+                ]
+              }
+            ],
+            "_meta": {
+              "io.modelcontextprotocol.registry/publisher-provided": {
+                "tool": "manual",
+                "version": "0.7.0"
+              }
+            }
+          },
+          "_meta": {
+            "io.modelcontextprotocol.registry/official": {
+              "status": "active",
+              "statusChangedAt": "2026-09-26T01:04:58.103447Z",
+              "publishedAt": "2026-09-26T01:04:58.103447Z",
+              "updatedAt": "2026-09-26T01:04:58.103447Z",
               "isLatest": true
             }
           }

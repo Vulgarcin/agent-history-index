@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AHI — registro histórico, observación y verificación del ecosistema de inteligencia artificial.">
+  <title>AHI — Agent History Index</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="grid-bg" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="brand" href="#inicio" aria-label="AHI inicio">
+      <span class="brand-mark"><b>A</b><i>H</i><b>I</b></span>
+      <span><strong>Agent History Index</strong><small>Historical AI intelligence</small></span>
+    </a>
+    <nav id="desktopNav">
+      <a href="#explorar">Explorar</a><a href="#evidencia">Evidencia</a><a href="#inteligencia">Inteligencia</a><a href="#noticias">Señales</a><a href="#metodologia">Metodología</a>
+    </nav>
+    <div class="top-actions"><button class="ghost" data-open="contact">Contacto</button><button class="primary" data-open="pro">AHI Pro</button><button id="menu" class="menu">☰</button></div>
+  </header>
+  <nav id="mobileNav" class="mobile-nav">
+    <a href="#explorar">Explorar</a><a href="#evidencia">Evidencia</a><a href="#inteligencia">Inteligencia</a><a href="#noticias">Señales</a><a href="#metodologia">Metodología</a>
+  </nav>
+
+  <main id="inicio">
+    <section class="hero wrap">
+      <div class="live"><span></span> AHI OBSERVATION LAYER</div>
+      <h1>Descubre qué existe.<br><em>Demuestra qué cambió.</em></h1>
+      <p class="hero-copy">AHI concentra información técnica, histórica, operativa y de mercado del ecosistema de IA. Conservamos observaciones, detectamos deriva y construimos evidencia verificable para desarrolladores, investigadores, empresas e inversores.</p>
+      <form id="searchForm" class="search"><input id="searchInput" type="search" placeholder="Buscar agente, modelo, protocolo, empresa o tecnología…"><button>Buscar</button></form>
+      <div class="chips"><button data-q="MCP">MCP</button><button data-q="A2A">A2A</button><button data-q="agentes">Agentes</button><button data-q="seguridad">Seguridad</button><button data-q="histórico">Histórico</button></div>
+    </section>
+
+    <section class="status-band">
+      <div class="wrap status-grid">
+        <article><span>Último snapshot</span><strong id="snapshotDate">Cargando…</strong><small id="snapshotRecords">— registros</small></article>
+        <article><span>Último compare</span><strong id="changeCount">—</strong><small>cambios detectados</small></article>
+        <article><span>Evidencia registrada</span><strong id="treeSize">—</strong><small>entradas en cadena</small></article>
+        <article><span>Integridad</span><strong id="integrityState">SHA-256 + Merkle</strong><small id="signatureState">checkpoint verificable</small></article>
+      </div>
+    </section>
+
+    <section class="wrap section" id="explorar">
+      <div class="section-head"><div><span class="kicker">DIRECTORIO PÚBLICO</span><h2>El ecosistema, en contexto</h2></div><p>La versión pública muestra estado actual, procedencia y señales recientes. El histórico profundo queda preparado para AHI Pro.</p></div>
+      <div id="cards" class="cards"></div>
+    </section>
+
+    <section class="dark-section" id="evidencia">
+      <div class="wrap">
+        <div class="section-head"><div><span class="kicker">AHI EVIDENCE REGISTRY</span><h2>El pasado no se reescribe en silencio</h2></div><p>Una corrección crea un nuevo registro. Las observaciones anteriores permanecen y sus hashes permiten detectar alteraciones retroactivas.</p></div>
+        <div class="evidence-flow">
+          <article><b>01</b><h3>Captura</h3><p>Snapshot original con fuente, hora, collector y recuento.</p></article>
+          <article><b>02</b><h3>Hash</h3><p>SHA-256 del artefacto y encadenamiento con la evidencia anterior.</p></article>
+          <article><b>03</b><h3>Merkle</h3><p>Checkpoint cronológico que resume criptográficamente el conjunto.</p></article>
+          <article><b>04</b><h3>Consulta</h3><p>Estado indexado rápido enlazado con la evidencia histórica.</p></article>
+        </div>
+        <div class="proof"><span>Merkle root actual</span><code id="merkleRoot">Aún no generado en esta copia local</code></div>
+      </div>
+    </section>
+
+    <section class="wrap section" id="inteligencia">
+      <div class="section-head"><div><span class="kicker">INTELIGENCIA HISTÓRICA</span><h2>Un dato aislado informa. Una serie histórica explica.</h2></div><p>AHI está diseñado para unir información que normalmente vive separada.</p></div>
+      <div class="feature-grid">
+        <article><h3>Identity & Governance</h3><p>Agent ID, desarrollador, propietario, licencia, gobernanza, lineage y estado operativo.</p></article>
+        <article><h3>Capability Drift</h3><p>Qué capacidades, permisos, protocolos o políticas aparecieron, cambiaron o desaparecieron entre T0 y T1.</p></article>
+        <article><h3>Reliability & Risk</h3><p>SLA declarado, disponibilidad observada, incidentes, vulnerabilidades, fixes y evidencia de recuperación.</p></article>
+        <article><h3>Market Traction</h3><p>Adopción pública, instalaciones, llamadas API, usuarios reportados, actividad de repositorio y señales de crecimiento con su procedencia.</p></article>
+        <article><h3>Cost & Performance</h3><p>Precios publicados, costos estimados bajo workloads definidos, latencia p50/p95/p99 y límites declarados vs medidos.</p></article>
+        <article><h3>Verification Nodes</h3><p>Benchmarks reproducibles con versión de prueba, entorno, hashes de entrada/salida, tiempo y firma del nodo.</p></article>
+      </div>
+    </section>
+
+    <section class="signals section" id="noticias">
+      <div class="wrap">
+        <div class="section-head"><div><span class="kicker">NEWS / SIGNALS</span><h2>Los acontecimientos conectados con los datos</h2></div><p>Noticias, releases, incidentes y cambios de mercado podrán quedar enlazados directamente con la entidad y su timeline.</p></div>
+        <div class="signal-list" id="signals"></div>
+      </div>
+    </section>
+
+    <section class="wrap section" id="metodologia">
+      <div class="method-card">
+        <div><span class="kicker">METODOLOGÍA</span><h2>Cinco clases de evidencia</h2><p>AHI evita presentar marketing, observación y verificación como si fueran lo mismo.</p></div>
+        <div class="evidence-types"><span>DECLARED <small>lo afirma el desarrollador</small></span><span>OBSERVED <small>lo capturó AHI</small></span><span>VERIFIED <small>AHI lo reprodujo</small></span><span>THIRD-PARTY <small>fuente externa identificada</small></span><span>ESTIMATED <small>cálculo con supuestos explícitos</small></span></div>
+      </div>
+    </section>
+
+    <section class="wrap pro-section">
+      <span class="kicker">AHI PRO · PRÓXIMAMENTE</span>
+      <h2>La capa profunda del histórico</h2>
+      <p>Timeline completo, comparaciones T0/T1, capability drift, reliability, incidentes, market intelligence, evidencia criptográfica, exportaciones y API.</p>
+      <div class="pro-grid"><span>Historial completo</span><span>Drift técnico</span><span>Market intelligence</span><span>Security timeline</span><span>Evidence proofs</span><span>API / export</span></div>
+      <button class="primary" data-open="contact">Solicitar información</button>
+    </section>
+  </main>
+
+  <footer><div class="wrap footer"><div><strong>AHI · Agent History Index</strong><p>Historical transparency and verification for the AI ecosystem.</p></div><div><a href="#metodologia">Metodología</a><a href="#evidencia">Evidencia</a><button data-open="contact">Contacto</button></div></div></footer>
+
+  <div class="modal" id="proModal"><div class="modal-card"><button class="close" data-close>×</button><span class="kicker">AHI PRO</span><h2>Acceso profundo en preparación</h2><p>El lanzamiento inicial es informativo. Los planes pagos se activarán cuando conectemos autenticación y el proveedor de cobro. Ningún pago se procesa desde esta página todavía.</p><button class="primary" data-switch="contact">Quiero información</button></div></div>
+  <div class="modal" id="contactModal"><div class="modal-card"><button class="close" data-close>×</button><span class="kicker">CONTACTO</span><h2>Habla con AHI</h2><p>Mientras conectamos el formulario real, utiliza los canales públicos que publiquemos en el repositorio/sitio oficial. No introduzcas información sensible en esta maqueta estática.</p></div></div>
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>

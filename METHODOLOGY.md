@@ -1,77 +1,59 @@
-# Agent History Index — Methodology
+# AHI Methodology
 
-## Purpose
+## Mission
+AHI is a historical transparency and verification layer for the AI ecosystem. It records
+what existed, what changed, when it changed, where the information came from, and what level
+of evidence supports the claim.
 
-Agent History Index (AHI) maintains a historical record of verifiable changes across the AI agent ecosystem.
-
-The objective is to preserve factual observations over time rather than rank, recommend, or evaluate agents.
-
-## Core rule
-
-Every event must represent an observable claim that can be traced to a source.
-
-An entry should answer:
-
-* What changed?
-* When did it happen?
-* Which project or organization was involved?
-* Where is the evidence?
-* When was the evidence verified by AHI?
+## Core rules
+1. Every factual record must be traceable to a source or a documented AHI measurement.
+2. Event time, observation time, verification time, and publication time are distinct.
+3. Historical evidence is never silently rewritten or deleted.
+4. Corrections are additive: a new observation supersedes an earlier one while preserving it.
+5. Declared, observed, verified, third-party, and estimated data are never conflated.
+6. Missing data is represented as unknown, not guessed.
 
 ## Source priority
+1. Specifications and standards
+2. Signed/official registries, repositories, releases, and status pages
+3. Official documentation and API references
+4. Official announcements and public company disclosures
+5. Reliable secondary sources
+6. Community sources used as leads, not as silent substitutes for primary evidence
 
-Sources should be prioritized in this order:
+## Historical state
+Operational state is modeled separately from security and project lineage.
 
-1. Official specifications and standards
-2. Official repositories and release records
-3. Official project or organization documentation
-4. Official announcements
-5. Reliable secondary sources when primary evidence is unavailable
+Operational examples: `active`, `degraded`, `deprecated`, `retired`, `discontinued`, `archived`.
+Security examples: `normal`, `vulnerable`, `compromised`, `under_investigation`, `patched`.
+Lineage examples: `original`, `fork`, `community_fork`, `official_fork`.
 
-Secondary sources should not replace accessible primary evidence without a reason.
+## Integrity
+AHI records SHA-256 hashes for captured artifacts, chains evidence entries to the previous
+entry hash, and creates Merkle-root checkpoints. Checkpoints can be signed with Ed25519 and,
+in later phases, externally timestamped/anchored.
 
-## Dates
+This makes retroactive modification detectable. AHI does not use the term "immutable" to
+claim that storage can never be destroyed; it uses append-only retention plus independent
+proofs to make silent historical rewriting detectable.
 
-AHI distinguishes between:
+## Benchmarks and verification
+Benchmarks must include the test specification version, environment, relevant model or
+agent version, timestamp, region when material, inputs/outputs or their hashes, and the
+measurement method. Advertised maximums are not treated as measured maximums.
 
-**Event date:** When the documented event occurred or was announced.
+## Market and financial data
+AHI may store factual sourced values such as pricing, market capitalization, reported
+private valuation, funding rounds, API usage claims, active-user claims, installations,
+downloads, repository activity, and token metrics.
 
-**Observed/verified date:** When AHI verified the evidence.
+Every metric must identify whether it is reported, observed, verified, third-party, or
+estimated and include its measurement window when known. AHI does not recommend investments.
 
-These dates must not be assumed to be the same.
+## Code and proprietary artifacts
+AHI does not redistribute proprietary source code merely because it was observed. It may
+retain permitted metadata such as repository/commit identifiers, release signatures,
+container digests, artifact hashes, license terms, source availability, and timestamps.
 
-## Historical integrity
-
-Existing historical records should not be silently rewritten when newer information appears.
-
-Corrections should be documented through repository history.
-
-If a project changes name, owner, capabilities, protocols, availability, or status, the new state should normally be recorded as a new historical event rather than erasing the previous state.
-
-## Neutrality
-
-AHI records observable events.
-
-It does not assign trust scores, safety scores, quality rankings, investment ratings, or subjective judgments.
-
-## Uncertainty
-
-If a claim cannot be verified with reasonable confidence, it should not be presented as confirmed data.
-
-Uncertain information may be researched separately before inclusion.
-
-## Corrections
-
-Errors should be corrected transparently through version-controlled commits.
-
-Whenever practical, the reason for a significant correction should be documented in the commit message.
-
-## Data provenance
-
-Records should preserve enough source information for another person to independently locate and inspect the supporting evidence.
-
-Future versions of the dataset may include additional provenance fields such as source URLs, first-seen dates, last-verified dates, archived references, and content hashes.
-
----
-
-**Methodology established: September 2026**
+## Retention
+The intended policy is preserve history. `collector/cleanup.py` deletes nothing.

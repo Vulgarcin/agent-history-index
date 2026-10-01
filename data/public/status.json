@@ -1,0 +1,28 @@
+{
+  "generated_at": "2026-10-01T17:11:19.485608+00:00",
+  "latest_snapshot": {
+    "date": "2026-09-30T17:49:46.384401+00:00",
+    "records": 2,
+    "file": "mcp-registry-2026-09-30.json"
+  },
+  "latest_changes": {
+    "previous_count": 36688,
+    "current_count": 37746,
+    "added": 1072,
+    "removed": 14,
+    "version_changed": 1370,
+    "status_changed": 54,
+    "changed_entries": 1422
+  },
+  "integrity": {
+    "tree_size": 10,
+    "merkle_root_sha256": "8aac436d47a0e6c96bb933cb7554a9fc1e1bf0475162be038a2716181b119317",
+    "checkpoint": "checkpoint-2026-10-01T171112Z.json",
+    "signed": false
+  },
+  "principles": {
+    "historical_deletion": false,
+    "append_only_evidence": true,
+    "source_traceability": true
+  }
+}

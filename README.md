@@ -1,54 +1,53 @@
-# Agent History Index
+# Agent History Index (AHI) — v4
 
-**A historical index of verifiable changes across the AI agent ecosystem.**
+**AHI is a historical transparency and verification layer for the AI ecosystem.**
 
-Agent History Index is an open project for documenting how AI agents, agent platforms, protocols, tools, and related infrastructure change over time.
+The public directory is the discovery surface. Under it, AHI is being built to preserve
+sourced observations, detect drift, verify integrity, and eventually provide historical,
+market, reliability, security, and benchmark intelligence.
 
-## Why this exists
+## V4 foundations
+- resilient MCP Registry collector with retry/backoff
+- complete-snapshot rule: failed collections do not save partial daily evidence
+- historical snapshots are retained; no cleanup deletion
+- comparison engine: added / removed / version / status / generic content drift
+- append-only JSONL evidence ledger
+- SHA-256 artifact digests and chained evidence-entry hashes
+- Merkle-tree checkpoints
+- optional Ed25519 signatures via deployment secret
+- public status JSON generated from real repository data
+- launchable static informational web front-end
+- architecture and roadmap documentation
 
-The AI agent ecosystem is evolving rapidly. Capabilities appear, protocols are adopted, products change names, projects become inactive, and features are added or removed.
+## Run the pipeline locally
+```bash
+python collector/collect.py
+python collector/compare.py
+python collector/integrity.py
+python collector/build_public_index.py
+python collector/cleanup.py
+```
 
-Information about these changes is often scattered across documentation, repositories, announcements, and release notes.
+## Optional checkpoint signing
+Generate/manage the private key outside the repository. Set only its raw 32-byte Ed25519
+private-key value as base64 in `AHI_SIGNING_KEY_B64`. Never commit private keys.
 
-Agent History Index aims to preserve a structured historical record of those changes.
+If the environment variable is absent, checkpoints remain hash/Merkle verified but unsigned.
 
-## What we track
+## Web
+Open `web/index.html` for a local preview. For `web/data/status.json` to be loaded by the
+browser reliably, serve the `web` folder with a tiny local web server:
 
-Records may include:
+```bash
+cd web
+python -m http.server 8000
+```
 
-* Project or agent name
-* Developer, organization, or provider
-* Date observed
-* Type of event
-* Capabilities added or removed
-* Protocol support
-* Important version changes
-* Project status changes
-* Original source
-* Date the source was verified
+Then visit `http://localhost:8000`.
 
-## Verification principles
+## Important production boundary
+Before monetization, collectors, signing keys, premium datasets, normalization logic,
+verification nodes, and privileged APIs should be moved behind private infrastructure.
+Do not put payment secrets or authentication credentials into the public front-end.
 
-Every historical entry should:
-
-1. Describe a factual and observable event.
-2. Include a source whenever possible.
-3. Separate confirmed facts from uncertain information.
-4. Preserve the date on which the information was observed.
-5. Avoid reputation scores or subjective judgments.
-
-## What this project is not
-
-Agent History Index does not certify that an AI agent is safe, trustworthy, or better than another agent.
-
-The project records historical information and leaves interpretation to researchers, developers, and users.
-
-## Status
-
-**Early-stage project — established September 2026.**
-
-The data structure and collection methodology are currently being developed.
-
-## Repository
-
-Maintained by **Vulgarcin**.
+See `docs/ARCHITECTURE.md`, `docs/ROADMAP.md`, and `Methodology.md`.

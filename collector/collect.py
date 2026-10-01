@@ -1,103 +1,142 @@
+from __future__ import annotations
+
 import json
-import urllib.request
-import urllib.parse
+import random
 import time
+import urllib.error
+import urllib.parse
+import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
 API_BASE = "https://registry.modelcontextprotocol.io/v0.1/servers"
-LIMIT = 100
-MAX_PAGES = 500
+MAX_PAGES = 1000
+PAGE_LIMIT = 100
+OUTPUT_DIR = Path(__file__).resolve().parents[1] / "data" / "snapshots"
+USER_AGENT = "Agent-History-Index/0.4 (+https://github.com/Vulgarcin/agent-history-index)"
+TIMEOUT_SECONDS = 60
+MAX_RETRIES = 5
+RETRYABLE_HTTP = {429, 500, 502, 503, 504}
 
-OUTPUT_DIR = Path("data/snapshots")
-OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-output_file = OUTPUT_DIR / f"mcp-registry-{today}.json"
+def fetch_json(url: str) -> dict:
+    """Fetch JSON with bounded exponential backoff.
 
-headers = {"User-Agent": "Agent-History-Index/0.1"}
+    A failed page is retried at the same cursor. The collector never writes a
+    partial snapshot: save_snapshot() is called only after collect() completes.
+    """
+    for attempt in range(1, MAX_RETRIES + 1):
+        req = urllib.request.Request(
+            url,
+            headers={"User-Agent": USER_AGENT, "Accept": "application/json"},
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=TIMEOUT_SECONDS) as response:
+                return json.load(response)
+        except urllib.error.HTTPError as exc:
+            retryable = exc.code in RETRYABLE_HTTP
+            if not retryable or attempt == MAX_RETRIES:
+                raise
+            retry_after = exc.headers.get("Retry-After") if exc.headers else None
+            try:
+                delay = float(retry_after) if retry_after else None
+            except (TypeError, ValueError):
+                delay = None
+            if delay is None:
+                delay = min(30.0, (2 ** (attempt - 1)) + random.random())
+            print(f"[retry] HTTP {exc.code}; attempt={attempt}/{MAX_RETRIES}; sleep={delay:.1f}s")
+            time.sleep(delay)
+        except (urllib.error.URLError, TimeoutError) as exc:
+            if attempt == MAX_RETRIES:
+                raise
+            delay = min(30.0, (2 ** (attempt - 1)) + random.random())
+            print(f"[retry] network error={exc}; attempt={attempt}/{MAX_RETRIES}; sleep={delay:.1f}s")
+            time.sleep(delay)
+    raise RuntimeError("unreachable")
 
-all_servers = []
-cursor = None
-seen_cursors = set()
-pages_fetched = 0
 
-while True:
-    params = {
-        "limit": LIMIT,
-        "version": "latest",
-    }
-
+def build_url(cursor: str | None = None) -> str:
+    params = {"limit": PAGE_LIMIT, "version": "latest"}
     if cursor:
         params["cursor"] = cursor
+    return f"{API_BASE}?{urllib.parse.urlencode(params)}"
 
-    url = f"{API_BASE}?{urllib.parse.urlencode(params)}"
-    request = urllib.request.Request(url, headers=headers)
 
-    with urllib.request.urlopen(request, timeout=60) as response:
-        page = json.load(response)
+def extract_items(payload: dict) -> list:
+    for key in ("servers", "data", "items", "results"):
+        value = payload.get(key)
+        if isinstance(value, list):
+            return value
+    return []
 
-    servers = page.get("servers", [])
-    all_servers.extend(servers)
-    pages_fetched += 1
 
-    next_cursor = page.get("metadata", {}).get("nextCursor")
+def extract_cursor(payload: dict) -> str | None:
+    for container in (payload, payload.get("pagination", {}), payload.get("metadata", {})):
+        if not isinstance(container, dict):
+            continue
+        for key in ("next_cursor", "nextCursor", "cursor"):
+            value = container.get(key)
+            if isinstance(value, str) and value.strip():
+                return value.strip()
+    return None
 
-    print(
-        f"Page {pages_fetched}: "
-        f"{len(servers)} servers, "
-        f"nextCursor={next_cursor!r}"
-    )
 
-    if not next_cursor:
-        break
+def collect() -> dict:
+    items: list = []
+    cursor: str | None = None
+    seen: set[str] = set()
+    started_at = datetime.now(timezone.utc)
 
-    if next_cursor in seen_cursors:
-        raise RuntimeError(
-            f"Pagination cursor repeated: {next_cursor!r}"
-        )
+    for page in range(1, MAX_PAGES + 1):
+        url = build_url(cursor)
+        payload = fetch_json(url)
+        page_items = extract_items(payload)
+        items.extend(page_items)
+        next_cursor = extract_cursor(payload)
+        print(f"Page {page}: {len(page_items)} servers, nextCursor={next_cursor!r}")
 
-    seen_cursors.add(next_cursor)
-    cursor = next_cursor
+        if not next_cursor:
+            break
+        if next_cursor in seen:
+            raise RuntimeError(f"Repeated cursor detected: {next_cursor!r}")
+        seen.add(next_cursor)
+        cursor = next_cursor
+        time.sleep(0.15)
+    else:
+        raise RuntimeError(f"MAX_PAGES={MAX_PAGES} reached before pagination ended")
 
-    if pages_fetched >= MAX_PAGES:
-        raise RuntimeError(
-            f"Stopped after {MAX_PAGES} pages."
-        )
+    finished_at = datetime.now(timezone.utc)
+    return {
+        "schema_version": "1.0",
+        "source": "MCP Registry",
+        "source_url": API_BASE,
+        "collector": "ahi-mcp-registry",
+        "collector_version": "0.4",
+        "collection_started_at": started_at.isoformat(),
+        "collected_at": finished_at.isoformat(),
+        "record_count": len(items),
+        "data": items,
+    }
 
-snapshot = {
-    "source": "Official MCP Registry",
-    "source_url": f"{API_BASE}?limit={LIMIT}&version=latest",
-    "collected_at": datetime.now(timezone.utc).isoformat(),
-    "data": {
-        "servers": all_servers,
-        "metadata": {
-            "count": len(all_servers),
-            "pages_fetched": pages_fetched,
-            "complete": True,
-        },
-    },
-}
-with output_file.open("w", encoding="utf-8") as file:
-    json.dump(snapshot, file, ensure_ascii=False, indent=2)
 
-print(f"Snapshot saved to {output_file}")
-page = None
+def save_snapshot(snapshot: dict) -> Path:
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    date = datetime.now(timezone.utc).date().isoformat()
+    path = OUTPUT_DIR / f"mcp-registry-{date}.json"
 
-for attempt in range(1, 6):
-    try:
-        with urllib.request.urlopen(request, timeout=30) as response:
-            page = json.load(response)
+    # Never silently overwrite historical evidence.
+    if path.exists():
+        existing = json.loads(path.read_text(encoding="utf-8"))
+        if existing == snapshot:
+            print(f"[save] identical snapshot already exists: {path}")
+            return path
+        stamp = datetime.now(timezone.utc).strftime("%H%M%S")
+        path = OUTPUT_DIR / f"mcp-registry-{date}-{stamp}.json"
 
-        break
+    path.write_text(json.dumps(snapshot, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    print(f"[save] snapshot saved to {path} ({path.stat().st_size} bytes)")
+    return path
 
-    except Exception as error:
-        print(
-            f"Request failed on attempt {attempt}/3: "
-            f"{error}"
-        )
 
-        if attempt == 3:
-            raise
-
-        time.sleep(5 * attempt)
+if __name__ == "__main__":
+    save_snapshot(collect())

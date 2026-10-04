@@ -3,7 +3,7 @@ name: Bootstrap AHI V13.1 Multi-Source
 on:
   push:
     paths:
-      - "automation/v13_payload.tar.gz.b64"
+      - "automation/v13_payload_part*"
 
 permissions:
   contents: write
@@ -27,8 +27,11 @@ jobs:
           from pathlib import Path
           import base64, io, tarfile
           root = Path(".").resolve()
-          payload = Path("automation/v13_payload.tar.gz.b64")
-          raw = base64.b64decode(payload.read_text(encoding="utf-8"))
+          parts = sorted(Path("automation").glob("v13_payload_part*"))
+          if not parts:
+              raise RuntimeError("No V13 payload parts found")
+          encoded = "".join(p.read_text(encoding="utf-8").strip() for p in parts)
+          raw = base64.b64decode(encoded)
           with tarfile.open(fileobj=io.BytesIO(raw), mode="r:gz") as tf:
               for member in tf.getmembers():
                   target = (root / member.name).resolve()
@@ -48,7 +51,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          rm -f automation/v13_payload.tar.gz.b64 .github/workflows/bootstrap-v13.yaml
+          rm -f automation/v13_payload_part* .github/workflows/bootstrap-v13.yaml
           rmdir automation 2>/dev/null || true
           git config --local core.hooksPath /dev/null
           git config --local user.name "agent-history-index-bot"

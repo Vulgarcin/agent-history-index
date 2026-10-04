@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "entity_id": "ahi-seed-dreamstudio",
+  "name": "DreamStudio",
+  "title": "DreamStudio",
+  "aliases": [
+    "Stability AI DreamStudio"
+  ],
+  "entity_type": "ai_tool",
+  "category": "image_generation",
+  "organization": "Stability AI",
+  "status": "active",
+  "description": "Interfaz de generación de imágenes de Stability AI.",
+  "official_url": "https://dreamstudio.ai",
+  "repository_url": null,
+  "launch_date": null,
+  "current_version": null,
+  "license": null,
+  "pricing_model": null,
+  "modalities": [],
+  "capabilities": [
+    "image_generation",
+    "image_editing"
+  ],
+  "protocols": [],
+  "source": "AHI curated seed",
+  "evidence_class": "DECLARED_OR_CURATED",
+  "verification_state": "needs_enrichment",
+  "sources": [
+    {
+      "label": "Official site",
+      "url": "https://dreamstudio.ai",
+      "kind": "official"
+    }
+  ]
+}

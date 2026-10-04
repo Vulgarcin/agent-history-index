@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "entity_id": "ahi-seed-canva-magic-studio",
+  "name": "Canva Magic Studio",
+  "title": "Canva Magic Studio",
+  "aliases": [
+    "Canva AI"
+  ],
+  "entity_type": "ai_tool",
+  "category": "design",
+  "organization": "Canva",
+  "status": "active",
+  "description": "Conjunto de funciones de IA integradas en Canva.",
+  "official_url": "https://www.canva.com/magic-studio/",
+  "repository_url": null,
+  "launch_date": null,
+  "current_version": null,
+  "license": null,
+  "pricing_model": null,
+  "modalities": [],
+  "capabilities": [
+    "design_assistance",
+    "image_generation"
+  ],
+  "protocols": [],
+  "source": "AHI curated seed",
+  "evidence_class": "DECLARED_OR_CURATED",
+  "verification_state": "needs_enrichment",
+  "sources": [
+    {
+      "label": "Official site",
+      "url": "https://www.canva.com/magic-studio/",
+      "kind": "official"
+    }
+  ]
+}

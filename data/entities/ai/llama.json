@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "entity_id": "ahi-seed-llama",
+  "name": "Llama",
+  "title": "Llama",
+  "aliases": [
+    "Meta Llama"
+  ],
+  "entity_type": "model_family",
+  "category": "foundation_model",
+  "organization": "Meta",
+  "status": "active",
+  "description": "Familia de modelos Llama de Meta.",
+  "official_url": "https://www.llama.com",
+  "repository_url": null,
+  "launch_date": null,
+  "current_version": null,
+  "license": null,
+  "pricing_model": null,
+  "modalities": [],
+  "capabilities": [
+    "text_generation"
+  ],
+  "protocols": [],
+  "source": "AHI curated seed",
+  "evidence_class": "DECLARED_OR_CURATED",
+  "verification_state": "needs_enrichment",
+  "sources": [
+    {
+      "label": "Official site",
+      "url": "https://www.llama.com",
+      "kind": "official"
+    }
+  ]
+}

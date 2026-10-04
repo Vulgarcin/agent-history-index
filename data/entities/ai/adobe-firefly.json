@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "entity_id": "ahi-seed-adobe-firefly",
+  "name": "Adobe Firefly",
+  "title": "Adobe Firefly",
+  "aliases": [
+    "Firefly"
+  ],
+  "entity_type": "ai_tool",
+  "category": "image_generation",
+  "organization": "Adobe",
+  "status": "active",
+  "description": "Familia de herramientas generativas de Adobe para imagen y medios creativos.",
+  "official_url": "https://firefly.adobe.com",
+  "repository_url": null,
+  "launch_date": null,
+  "current_version": null,
+  "license": null,
+  "pricing_model": null,
+  "modalities": [],
+  "capabilities": [
+    "image_generation",
+    "image_editing"
+  ],
+  "protocols": [],
+  "source": "AHI curated seed",
+  "evidence_class": "DECLARED_OR_CURATED",
+  "verification_state": "needs_enrichment",
+  "sources": [
+    {
+      "label": "Official site",
+      "url": "https://firefly.adobe.com",
+      "kind": "official"
+    }
+  ]
+}

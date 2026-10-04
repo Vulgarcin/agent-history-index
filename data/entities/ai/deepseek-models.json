@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "entity_id": "ahi-seed-deepseek-models",
+  "name": "DeepSeek Models",
+  "title": "DeepSeek Models",
+  "aliases": [
+    "DeepSeek family"
+  ],
+  "entity_type": "model_family",
+  "category": "foundation_model",
+  "organization": "DeepSeek",
+  "status": "active",
+  "description": "Familias de modelos desarrolladas por DeepSeek.",
+  "official_url": "https://www.deepseek.com",
+  "repository_url": null,
+  "launch_date": null,
+  "current_version": null,
+  "license": null,
+  "pricing_model": null,
+  "modalities": [],
+  "capabilities": [
+    "text_generation"
+  ],
+  "protocols": [],
+  "source": "AHI curated seed",
+  "evidence_class": "DECLARED_OR_CURATED",
+  "verification_state": "needs_enrichment",
+  "sources": [
+    {
+      "label": "Official site",
+      "url": "https://www.deepseek.com",
+      "kind": "official"
+    }
+  ]
+}

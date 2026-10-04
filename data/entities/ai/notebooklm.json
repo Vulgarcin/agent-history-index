@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "entity_id": "ahi-seed-notebooklm",
+  "name": "NotebookLM",
+  "title": "NotebookLM",
+  "aliases": [
+    "Google NotebookLM"
+  ],
+  "entity_type": "ai_product",
+  "category": "research_productivity",
+  "organization": "Google",
+  "status": "active",
+  "description": "Herramienta de investigación y síntesis basada en fuentes aportadas por el usuario.",
+  "official_url": "https://notebooklm.google.com",
+  "repository_url": null,
+  "launch_date": null,
+  "current_version": null,
+  "license": null,
+  "pricing_model": null,
+  "modalities": [],
+  "capabilities": [
+    "research",
+    "document_grounding"
+  ],
+  "protocols": [],
+  "source": "AHI curated seed",
+  "evidence_class": "DECLARED_OR_CURATED",
+  "verification_state": "needs_enrichment",
+  "sources": [
+    {
+      "label": "Official site",
+      "url": "https://notebooklm.google.com",
+      "kind": "official"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "entity_id": "ahi-seed-meta-ai",
+  "name": "Meta AI",
+  "title": "Meta AI",
+  "aliases": [
+    "Meta assistant"
+  ],
+  "entity_type": "ai_product",
+  "category": "general_assistant",
+  "organization": "Meta",
+  "status": "active",
+  "description": "Asistente de IA de Meta.",
+  "official_url": "https://www.meta.ai",
+  "repository_url": null,
+  "launch_date": null,
+  "current_version": null,
+  "license": null,
+  "pricing_model": null,
+  "modalities": [],
+  "capabilities": [
+    "conversation",
+    "text_generation"
+  ],
+  "protocols": [],
+  "source": "AHI curated seed",
+  "evidence_class": "DECLARED_OR_CURATED",
+  "verification_state": "needs_enrichment",
+  "sources": [
+    {
+      "label": "Official site",
+      "url": "https://www.meta.ai",
+      "kind": "official"
+    }
+  ]
+}

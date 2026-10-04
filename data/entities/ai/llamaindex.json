@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "entity_id": "ahi-seed-llamaindex",
+  "name": "LlamaIndex",
+  "title": "LlamaIndex",
+  "aliases": [
+    "Llama Index"
+  ],
+  "entity_type": "framework",
+  "category": "agent_framework",
+  "organization": "LlamaIndex",
+  "status": "active",
+  "description": "Framework para aplicaciones de IA conectadas a datos y agentes.",
+  "official_url": "https://www.llamaindex.ai",
+  "repository_url": null,
+  "launch_date": null,
+  "current_version": null,
+  "license": null,
+  "pricing_model": null,
+  "modalities": [],
+  "capabilities": [
+    "agents",
+    "tool_integration"
+  ],
+  "protocols": [],
+  "source": "AHI curated seed",
+  "evidence_class": "DECLARED_OR_CURATED",
+  "verification_state": "needs_enrichment",
+  "sources": [
+    {
+      "label": "Official site",
+      "url": "https://www.llamaindex.ai",
+      "kind": "official"
+    }
+  ]
+}

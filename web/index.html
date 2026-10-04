@@ -2,103 +2,134 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="AHI — registro histórico, observación y verificación del ecosistema de inteligencia artificial.">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#07090d">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'">
   <title>AHI — Agent History Index</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="intro-screen" id="introScreen" aria-label="Presentación de AHI">
+    <canvas id="introCanvas" aria-hidden="true"></canvas>
+    <div class="intro-card">
+      <div class="brand-mark"><span>A</span><b>H</b><span>I</span></div>
+      <div class="eyebrow">AGENT HISTORY INDEX</div>
+      <h1>Índice global y memoria histórica del ecosistema de IA.</h1>
+      <p>Productos · modelos · agentes · herramientas · frameworks · protocolos · MCP · seguridad · evidencia.</p>
+      <button class="primary" id="enterAhi">Entrar al índice</button>
+      <button class="ghost" id="skipIntro">Saltar presentación</button>
+    </div>
+  </div>
+
   <header class="topbar">
-    <a class="brand" href="#inicio" aria-label="AHI inicio">
-      <span class="brand-mark"><b>A</b><i>H</i><b>I</b></span>
-      <span><strong>Agent History Index</strong><small>Historical AI intelligence</small></span>
-    </a>
-    <nav id="desktopNav">
-      <a href="#explorar">Explorar</a><a href="#evidencia">Evidencia</a><a href="#inteligencia">Inteligencia</a><a href="#noticias">Señales</a><a href="#metodologia">Metodología</a>
+    <button class="brand" data-view="directory" aria-label="Ir al índice global"><span>A</span><b>H</b><span>I</span><small>Agent History Index</small></button>
+    <nav id="topnav" aria-label="Navegación principal">
+      <button class="nav-btn active" data-view="directory">Índice Global</button>
+      <button class="nav-btn" data-view="market">Mercado</button>
+      <button class="nav-btn" data-view="intelligence">Inteligencia & Evidencia</button>
+      <button class="nav-btn" data-view="contact">Contacto</button>
     </nav>
-    <div class="top-actions"><button class="ghost" data-open="contact">Contacto</button><button class="primary" data-open="pro">AHI Pro</button><button id="menu" class="menu">☰</button></div>
+    <button class="menu-btn" id="mobileMenu" aria-label="Abrir menú">☰</button>
   </header>
-  <nav id="mobileNav" class="mobile-nav">
-    <a href="#explorar">Explorar</a><a href="#evidencia">Evidencia</a><a href="#inteligencia">Inteligencia</a><a href="#noticias">Señales</a><a href="#metodologia">Metodología</a>
-  </nav>
 
-  <main id="inicio">
-    <section class="hero wrap">
-      <div class="live"><span></span> AHI OBSERVATION LAYER</div>
-      <h1>Descubre qué existe.<br><em>Demuestra qué cambió.</em></h1>
-      <p class="hero-copy">AHI concentra información técnica, histórica, operativa y de mercado del ecosistema de IA. Conservamos observaciones, detectamos deriva y construimos evidencia verificable para desarrolladores, investigadores, empresas e inversores.</p>
-      <form id="searchForm" class="search"><input id="searchInput" type="search" placeholder="Buscar agente, modelo, protocolo, empresa o tecnología…"><button>Buscar</button></form>
-      <div class="chips"><button data-q="MCP">MCP</button><button data-q="A2A">A2A</button><button data-q="agentes">Agentes</button><button data-q="seguridad">Seguridad</button><button data-q="histórico">Histórico</button></div>
-    </section>
-
-    <section class="status-band">
-      <div class="wrap status-grid">
-        <article><span>Último snapshot</span><strong id="snapshotDate">Cargando…</strong><small id="snapshotRecords">— registros</small></article>
-        <article><span>Último compare</span><strong id="changeCount">—</strong><small>cambios detectados</small></article>
-        <article><span>Evidencia registrada</span><strong id="treeSize">—</strong><small>entradas en cadena</small></article>
-        <article><span>Integridad</span><strong id="integrityState">SHA-256 + Merkle</strong><small id="signatureState">checkpoint verificable</small></article>
-      </div>
-    </section>
-
-    <section class="wrap section" id="explorar">
-      <div class="section-head"><div><span class="kicker">DIRECTORIO PÚBLICO</span><h2>El ecosistema, en contexto</h2></div><p>La versión pública muestra estado actual, procedencia y señales recientes. El histórico profundo queda preparado para AHI Pro.</p></div>
-      <div id="cards" class="cards"></div>
-    </section>
-
-    <section class="dark-section" id="evidencia">
-      <div class="wrap">
-        <div class="section-head"><div><span class="kicker">AHI EVIDENCE REGISTRY</span><h2>El pasado no se reescribe en silencio</h2></div><p>Una corrección crea un nuevo registro. Las observaciones anteriores permanecen y sus hashes permiten detectar alteraciones retroactivas.</p></div>
-        <div class="evidence-flow">
-          <article><b>01</b><h3>Captura</h3><p>Snapshot original con fuente, hora, collector y recuento.</p></article>
-          <article><b>02</b><h3>Hash</h3><p>SHA-256 del artefacto y encadenamiento con la evidencia anterior.</p></article>
-          <article><b>03</b><h3>Merkle</h3><p>Checkpoint cronológico que resume criptográficamente el conjunto.</p></article>
-          <article><b>04</b><h3>Consulta</h3><p>Estado indexado rápido enlazado con la evidencia histórica.</p></article>
+  <main>
+    <section class="view active" id="view-directory">
+      <div class="hero compact-hero">
+        <div>
+          <div class="eyebrow">AHI GLOBAL INDEX</div>
+          <h1>Un solo índice para entender qué existe en IA y cómo evoluciona.</h1>
+          <p id="catalogNote">Cargando catálogo…</p>
         </div>
-        <div class="proof"><span>Merkle root actual</span><code id="merkleRoot">Aún no generado en esta copia local</code></div>
+        <div class="hero-count"><strong id="entityTotal">—</strong><span>entidades conocidas</span></div>
+      </div>
+
+      <div class="category-strip" id="categoryStrip"></div>
+
+      <div class="directory-shell">
+        <aside class="directory-list panel">
+          <div class="search-row">
+            <input id="searchInput" maxlength="200" autocomplete="off" placeholder="Buscar ChatGPT, Gemini, Claude, video, coding, MCP…">
+            <button id="clearSearch" aria-label="Limpiar búsqueda">×</button>
+          </div>
+          <div class="filters">
+            <select id="typeFilter" aria-label="Filtrar por tipo"><option value="all">Todos los tipos</option></select>
+            <select id="categoryFilter" aria-label="Filtrar por categoría"><option value="all">Todas las categorías</option></select>
+          </div>
+          <div class="result-meta"><span id="resultCount">0 resultados</span><span id="coverageHint">—</span></div>
+          <div class="entity-list" id="entityList"></div>
+        </aside>
+
+        <article class="entity-panel panel" id="entityPanel">
+          <div class="entity-empty" id="entityEmpty">Selecciona una entidad del Índice Global.</div>
+          <div class="entity-content hidden" id="entityContent">
+            <div class="entity-head">
+              <div>
+                <div class="entity-kicker" id="entityKicker"></div>
+                <h2 id="entityTitle"></h2>
+                <p id="entityDescription"></p>
+              </div>
+              <a class="source-link hidden" id="officialLink" target="_blank" rel="noopener noreferrer">Sitio oficial ↗</a>
+            </div>
+
+            <div class="summary-grid" id="summaryGrid"></div>
+
+            <div class="section-tabs" id="entityTabs">
+              <button class="active" data-section="overview">Resumen</button>
+              <button data-section="history">Historia</button>
+              <button data-section="capabilities">Capacidades</button>
+              <button data-section="security">Seguridad</button>
+              <button data-section="evidence">Evidencia</button>
+            </div>
+            <div class="section-body" id="sectionBody"></div>
+          </div>
+        </article>
       </div>
     </section>
 
-    <section class="wrap section" id="inteligencia">
-      <div class="section-head"><div><span class="kicker">INTELIGENCIA HISTÓRICA</span><h2>Un dato aislado informa. Una serie histórica explica.</h2></div><p>AHI está diseñado para unir información que normalmente vive separada.</p></div>
-      <div class="feature-grid">
-        <article><h3>Identity & Governance</h3><p>Agent ID, desarrollador, propietario, licencia, gobernanza, lineage y estado operativo.</p></article>
-        <article><h3>Capability Drift</h3><p>Qué capacidades, permisos, protocolos o políticas aparecieron, cambiaron o desaparecieron entre T0 y T1.</p></article>
-        <article><h3>Reliability & Risk</h3><p>SLA declarado, disponibilidad observada, incidentes, vulnerabilidades, fixes y evidencia de recuperación.</p></article>
-        <article><h3>Market Traction</h3><p>Adopción pública, instalaciones, llamadas API, usuarios reportados, actividad de repositorio y señales de crecimiento con su procedencia.</p></article>
-        <article><h3>Cost & Performance</h3><p>Precios publicados, costos estimados bajo workloads definidos, latencia p50/p95/p99 y límites declarados vs medidos.</p></article>
-        <article><h3>Verification Nodes</h3><p>Benchmarks reproducibles con versión de prueba, entorno, hashes de entrada/salida, tiempo y firma del nodo.</p></article>
+    <section class="view" id="view-market">
+      <div class="hero compact-hero">
+        <div><div class="eyebrow">AHI MARKET INTELLIGENCE</div><h1>Qué se está moviendo dentro del ecosistema observado.</h1><p>Las métricas solo aparecen cuando existe una serie real. AHI no inventa cotizaciones ni tendencias.</p></div>
+        <div class="hero-count"><strong id="marketCoverage">—</strong><span>entidades con serie</span></div>
+      </div>
+      <div class="metric-switcher" id="metricSwitcher">
+        <button class="active" data-metric="activity">Actividad</button>
+        <button data-metric="growth">Crecimiento</button>
+        <button data-metric="downloads">Descargas</button>
+        <button data-metric="stars">Stars</button>
+        <button data-metric="security">Seguridad</button>
+      </div>
+      <div class="market-grid">
+        <div class="panel ranking-panel"><div class="panel-title"><span>Ranking</span><small id="marketMethod"></small></div><div id="marketRanking" class="ranking-list"></div></div>
+        <div class="panel chart-panel">
+          <div class="chart-head"><div><span class="eyebrow">ENTIDAD SELECCIONADA</span><h2 id="marketEntity">—</h2></div><div class="chart-stats" id="chartStats"></div></div>
+          <div class="chart-wrap"><canvas id="marketChart"></canvas><div class="chart-empty" id="chartEmpty">Selecciona una entidad con al menos dos observaciones.</div></div>
+        </div>
       </div>
     </section>
 
-    <section class="signals section" id="noticias">
-      <div class="wrap">
-        <div class="section-head"><div><span class="kicker">NEWS / SIGNALS</span><h2>Los acontecimientos conectados con los datos</h2></div><p>Noticias, releases, incidentes y cambios de mercado podrán quedar enlazados directamente con la entidad y su timeline.</p></div>
-        <div class="signal-list" id="signals"></div>
+    <section class="view" id="view-intelligence">
+      <div class="hero compact-hero"><div><div class="eyebrow">INTELIGENCIA & EVIDENCIA</div><h1>Cómo AHI observa, conserva y demuestra su historial.</h1><p>Esta sección es global. Las fichas individuales muestran únicamente evidencia de la entidad seleccionada.</p></div></div>
+      <div class="intel-grid" id="signalsCards"></div>
+      <div class="two-col">
+        <div class="panel"><div class="panel-title"><span>Integridad global</span></div><div id="globalEvidence" class="evidence-grid"></div></div>
+        <div class="panel"><div class="panel-title"><span>Metodología</span></div><div class="method-copy"><p><b>DECLARED</b>: información publicada por la organización o desarrollador.</p><p><b>OBSERVED</b>: información capturada directamente por AHI en una fecha concreta.</p><p><b>HISTORICAL_IMPORTED</b>: información histórica recuperada después desde una fuente identificada.</p><p><b>VERIFIED</b>: evidencia que AHI pudo comprobar de forma reproducible.</p><p>El historial no se borra silenciosamente: las correcciones se agregan como nuevos registros.</p></div></div>
       </div>
+      <div class="panel"><div class="panel-title"><span>Comparativas recientes del ecosistema</span></div><div id="comparisonStrip" class="comparison-strip"></div></div>
     </section>
 
-    <section class="wrap section" id="metodologia">
-      <div class="method-card">
-        <div><span class="kicker">METODOLOGÍA</span><h2>Cinco clases de evidencia</h2><p>AHI evita presentar marketing, observación y verificación como si fueran lo mismo.</p></div>
-        <div class="evidence-types"><span>DECLARED <small>lo afirma el desarrollador</small></span><span>OBSERVED <small>lo capturó AHI</small></span><span>VERIFIED <small>AHI lo reprodujo</small></span><span>THIRD-PARTY <small>fuente externa identificada</small></span><span>ESTIMATED <small>cálculo con supuestos explícitos</small></span></div>
+    <section class="view" id="view-contact">
+      <div class="hero compact-hero"><div><div class="eyebrow">CONTACTO</div><h1>Proyecto público, trazable y en construcción.</h1><p>AHI está ampliando su cobertura desde MCP hacia productos, modelos, agentes, herramientas y seguridad.</p></div></div>
+      <div class="contact-card panel">
+        <h2>Agent History Index</h2>
+        <p>Repositorio oficial del proyecto:</p>
+        <a href="https://github.com/Vulgarcin/agent-history-index" target="_blank" rel="noopener noreferrer">github.com/Vulgarcin/agent-history-index ↗</a>
+        <p class="muted">Los canales de correo corporativo y redes oficiales se publicarán cuando estén operativos.</p>
       </div>
-    </section>
-
-    <section class="wrap pro-section">
-      <span class="kicker">AHI PRO · PRÓXIMAMENTE</span>
-      <h2>La capa profunda del histórico</h2>
-      <p>Timeline completo, comparaciones T0/T1, capability drift, reliability, incidentes, market intelligence, evidencia criptográfica, exportaciones y API.</p>
-      <div class="pro-grid"><span>Historial completo</span><span>Drift técnico</span><span>Market intelligence</span><span>Security timeline</span><span>Evidence proofs</span><span>API / export</span></div>
-      <button class="primary" data-open="contact">Solicitar información</button>
     </section>
   </main>
 
-  <footer><div class="wrap footer"><div><strong>AHI · Agent History Index</strong><p>Historical transparency and verification for the AI ecosystem.</p></div><div><a href="#metodologia">Metodología</a><a href="#evidencia">Evidencia</a><button data-open="contact">Contacto</button></div></div></footer>
-
-  <div class="modal" id="proModal"><div class="modal-card"><button class="close" data-close>×</button><span class="kicker">AHI PRO</span><h2>Acceso profundo en preparación</h2><p>El lanzamiento inicial es informativo. Los planes pagos se activarán cuando conectemos autenticación y el proveedor de cobro. Ningún pago se procesa desde esta página todavía.</p><button class="primary" data-switch="contact">Quiero información</button></div></div>
-  <div class="modal" id="contactModal"><div class="modal-card"><button class="close" data-close>×</button><span class="kicker">CONTACTO</span><h2>Habla con AHI</h2><p>Mientras conectamos el formulario real, utiliza los canales públicos que publiquemos en el repositorio/sitio oficial. No introduzcas información sensible en esta maqueta estática.</p></div></div>
-  <div id="toast" class="toast"></div>
+  <div class="toast" id="toast"></div>
   <script src="app.js"></script>
 </body>
 </html>

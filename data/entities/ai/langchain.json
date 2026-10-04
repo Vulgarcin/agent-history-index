@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "entity_id": "ahi-seed-langchain",
+  "name": "LangChain",
+  "title": "LangChain",
+  "aliases": [
+    "LangChain Framework"
+  ],
+  "entity_type": "framework",
+  "category": "agent_framework",
+  "organization": "LangChain",
+  "status": "active",
+  "description": "Framework y plataforma para aplicaciones y agentes basados en modelos de lenguaje.",
+  "official_url": "https://www.langchain.com",
+  "repository_url": null,
+  "launch_date": null,
+  "current_version": null,
+  "license": null,
+  "pricing_model": null,
+  "modalities": [],
+  "capabilities": [
+    "agents",
+    "tool_integration"
+  ],
+  "protocols": [],
+  "source": "AHI curated seed",
+  "evidence_class": "DECLARED_OR_CURATED",
+  "verification_state": "needs_enrichment",
+  "sources": [
+    {
+      "label": "Official site",
+      "url": "https://www.langchain.com",
+      "kind": "official"
+    }
+  ]
+}

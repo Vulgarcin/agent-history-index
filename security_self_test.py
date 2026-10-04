@@ -1,0 +1,35 @@
+from pathlib import Path
+import importlib.util, sys
+ROOT=Path(__file__).resolve().parent
+APP=(ROOT/'web/app.js').read_text(encoding='utf-8')
+HTML=(ROOT/'web/index.html').read_text(encoding='utf-8')
+BUILDER=ROOT/'collector/build_public_index.py'
+checks=[]
+def check(name, cond): checks.append((name,bool(cond)))
+check('No eval()', 'eval(' not in APP)
+check('No new Function', 'new Function' not in APP)
+check('No document.write', 'document.write' not in APP)
+check('HTTPS URL allowlist present', 'u.protocol!=="https:"' in APP)
+check('External links use noopener noreferrer', 'rel="noopener noreferrer"' in HTML and 'rel="noopener noreferrer"' in APP)
+check('CSP present', 'Content-Security-Policy' in HTML)
+check('Referrer policy present', 'name="referrer" content="no-referrer"' in HTML)
+check('Search field bounded', 'maxlength="200"' in HTML and '.slice(0,200)' in APP)
+check('Catalog entity ceiling in client', '.slice(0,100000)' in APP)
+check('Catalog sanitizer in client', '.map(cleanEntity).filter(Boolean)' in APP)
+text=BUILDER.read_text(encoding='utf-8')
+check('Builder has HTTPS URL sanitizer', 'def safe_public_url' in text)
+check('Builder has entity ceiling', 'MAX_ENTITIES = 100000' in text)
+check('Builder seed byte ceiling', 'MAX_SEED_BYTES = 256 * 1024' in text)
+check('Builder seed file ceiling', 'MAX_SEED_FILES = 1000' in text)
+check('Builder rejects seed symlinks', 'Refusing symlinked entity seed' in text)
+spec=importlib.util.spec_from_file_location('builder', BUILDER)
+mod=importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
+check('Builder blocks javascript URL', mod.safe_public_url('javascript:alert(1)') is None)
+check('Builder blocks data URL', mod.safe_public_url('data:text/html,x') is None)
+check('Builder blocks http URL', mod.safe_public_url('http://example.com') is None)
+check('Builder accepts https URL', mod.safe_public_url('https://example.com/a') == 'https://example.com/a')
+check('Builder clips text', mod.first_text({'x':'a'*9000},('x',)) == 'a'*mod.MAX_TEXT)
+failed=[n for n,ok in checks if not ok]
+for n,ok in checks: print(('PASS' if ok else 'FAIL'), '-', n)
+print(f'\n{len(checks)-len(failed)}/{len(checks)} checks passed')
+if failed: sys.exit(1)

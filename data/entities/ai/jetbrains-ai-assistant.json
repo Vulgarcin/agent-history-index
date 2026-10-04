@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "entity_id": "ahi-seed-jetbrains-ai-assistant",
+  "name": "JetBrains AI Assistant",
+  "title": "JetBrains AI Assistant",
+  "aliases": [
+    "JetBrains AI"
+  ],
+  "entity_type": "ai_tool",
+  "category": "coding",
+  "organization": "JetBrains",
+  "status": "active",
+  "description": "Asistencia de IA integrada en IDEs de JetBrains.",
+  "official_url": "https://www.jetbrains.com/ai/",
+  "repository_url": null,
+  "launch_date": null,
+  "current_version": null,
+  "license": null,
+  "pricing_model": null,
+  "modalities": [],
+  "capabilities": [
+    "code_assistance",
+    "software_development"
+  ],
+  "protocols": [],
+  "source": "AHI curated seed",
+  "evidence_class": "DECLARED_OR_CURATED",
+  "verification_state": "needs_enrichment",
+  "sources": [
+    {
+      "label": "Official site",
+      "url": "https://www.jetbrains.com/ai/",
+      "kind": "official"
+    }
+  ]
+}

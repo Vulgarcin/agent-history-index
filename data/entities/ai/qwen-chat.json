@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "entity_id": "ahi-seed-qwen-chat",
+  "name": "Qwen Chat",
+  "title": "Qwen Chat",
+  "aliases": [
+    "Qwen"
+  ],
+  "entity_type": "ai_product",
+  "category": "general_assistant",
+  "organization": "Alibaba Cloud",
+  "status": "active",
+  "description": "Interfaz conversacional para la familia Qwen.",
+  "official_url": "https://chat.qwen.ai",
+  "repository_url": null,
+  "launch_date": null,
+  "current_version": null,
+  "license": null,
+  "pricing_model": null,
+  "modalities": [],
+  "capabilities": [
+    "conversation",
+    "text_generation"
+  ],
+  "protocols": [],
+  "source": "AHI curated seed",
+  "evidence_class": "DECLARED_OR_CURATED",
+  "verification_state": "needs_enrichment",
+  "sources": [
+    {
+      "label": "Official site",
+      "url": "https://chat.qwen.ai",
+      "kind": "official"
+    }
+  ]
+}

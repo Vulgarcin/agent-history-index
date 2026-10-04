@@ -1,0 +1,73 @@
+name: AHI External Backfill (Manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "Existing entities to enrich per source"
+        required: false
+        default: "100"
+      discover_hf:
+        description: "Trending Hugging Face models to import"
+        required: false
+        default: "100"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ahi-external-backfill
+  cancel-in-progress: false
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@v5.6.0
+        with:
+          python-version: '3.13'
+      - name: Build current catalog
+        run: python collector/build_public_index.py
+      - name: Capture licensed external enrichment
+        env:
+          AHI_SOURCE_CONTACT_EMAIL: ${{ secrets.AHI_SOURCE_CONTACT_EMAIL }}
+        run: >-
+          python collector/backfill_external.py
+          --limit "${{ inputs.limit }}"
+          --discover-hf "${{ inputs.discover_hf }}"
+      - name: Rebuild indexes with external evidence
+        run: python collector/build_public_index.py
+      - name: Security regression tests
+        run: |
+          python security_self_test.py
+          python security_pipeline_test.py
+          python external_backfill_self_test.py
+      - name: Reject symlinks in generated paths
+        shell: bash
+        run: |
+          if find data/external data/public web/data -type l -print -quit 2>/dev/null | grep -q .; then
+            echo "Generated symlink detected; refusing commit."
+            exit 1
+          fi
+      - name: Commit external evidence
+        shell: bash
+        run: |
+          git config core.hooksPath /dev/null
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/external data/public web/data
+          if git diff --cached --quiet; then
+            echo "No external evidence changes to commit."
+            exit 0
+          fi
+          git commit -m "Capture licensed external AHI evidence"
+          git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git push origin HEAD:main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "entity_id": "ahi-seed-pixverse",
+  "name": "PixVerse",
+  "title": "PixVerse",
+  "aliases": [
+    "PixVerse AI"
+  ],
+  "entity_type": "ai_tool",
+  "category": "video_generation",
+  "organization": "PixVerse",
+  "status": "active",
+  "description": "Herramienta de generación de video mediante IA.",
+  "official_url": "https://pixverse.ai",
+  "repository_url": null,
+  "launch_date": null,
+  "current_version": null,
+  "license": null,
+  "pricing_model": null,
+  "modalities": [],
+  "capabilities": [
+    "video_generation"
+  ],
+  "protocols": [],
+  "source": "AHI curated seed",
+  "evidence_class": "DECLARED_OR_CURATED",
+  "verification_state": "needs_enrichment",
+  "sources": [
+    {
+      "label": "Official site",
+      "url": "https://pixverse.ai",
+      "kind": "official"
+    }
+  ]
+}

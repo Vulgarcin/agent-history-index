@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "entity_id": "ahi-seed-gemma",
+  "name": "Gemma",
+  "title": "Gemma",
+  "aliases": [
+    "Google Gemma"
+  ],
+  "entity_type": "model_family",
+  "category": "foundation_model",
+  "organization": "Google",
+  "status": "active",
+  "description": "Familia de modelos abiertos Gemma de Google.",
+  "official_url": "https://ai.google.dev/gemma",
+  "repository_url": null,
+  "launch_date": null,
+  "current_version": null,
+  "license": null,
+  "pricing_model": null,
+  "modalities": [],
+  "capabilities": [
+    "text_generation"
+  ],
+  "protocols": [],
+  "source": "AHI curated seed",
+  "evidence_class": "DECLARED_OR_CURATED",
+  "verification_state": "needs_enrichment",
+  "sources": [
+    {
+      "label": "Official site",
+      "url": "https://ai.google.dev/gemma",
+      "kind": "official"
+    }
+  ]
+}

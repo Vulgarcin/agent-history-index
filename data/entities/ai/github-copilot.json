@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "entity_id": "ahi-seed-github-copilot",
+  "name": "GitHub Copilot",
+  "title": "GitHub Copilot",
+  "aliases": [
+    "Copilot Coding"
+  ],
+  "entity_type": "ai_tool",
+  "category": "coding",
+  "organization": "GitHub / Microsoft",
+  "status": "active",
+  "description": "Asistente y agente de programación integrado en GitHub y herramientas de desarrollo.",
+  "official_url": "https://github.com/features/copilot",
+  "repository_url": null,
+  "launch_date": null,
+  "current_version": null,
+  "license": null,
+  "pricing_model": null,
+  "modalities": [],
+  "capabilities": [
+    "code_assistance",
+    "software_development"
+  ],
+  "protocols": [],
+  "source": "AHI curated seed",
+  "evidence_class": "DECLARED_OR_CURATED",
+  "verification_state": "needs_enrichment",
+  "sources": [
+    {
+      "label": "Official site",
+      "url": "https://github.com/features/copilot",
+      "kind": "official"
+    }
+  ]
+}

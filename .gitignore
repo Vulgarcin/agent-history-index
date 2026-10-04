@@ -1,7 +1,18 @@
+# Python runtime caches - generated automatically, never part of AHI source
 __pycache__/
-*.pyc
-.vscode/
-.env
-.env.*
+*.py[cod]
+*$py.class
+
+# Local virtual environments
+.venv/
+venv/
+env/
+
+# Local/runtime files
 .DS_Store
 Thumbs.db
+
+# Secrets/local environment
+.env
+.env.*
+!.env.example

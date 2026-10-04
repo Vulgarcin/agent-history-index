@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "entity_id": "ahi-seed-kling-ai",
+  "name": "Kling AI",
+  "title": "Kling AI",
+  "aliases": [
+    "Kling"
+  ],
+  "entity_type": "ai_tool",
+  "category": "video_generation",
+  "organization": "Kuaishou",
+  "status": "active",
+  "description": "Plataforma de generación de video e imagen mediante IA.",
+  "official_url": "https://klingai.com",
+  "repository_url": null,
+  "launch_date": null,
+  "current_version": null,
+  "license": null,
+  "pricing_model": null,
+  "modalities": [],
+  "capabilities": [
+    "video_generation"
+  ],
+  "protocols": [],
+  "source": "AHI curated seed",
+  "evidence_class": "DECLARED_OR_CURATED",
+  "verification_state": "needs_enrichment",
+  "sources": [
+    {
+      "label": "Official site",
+      "url": "https://klingai.com",
+      "kind": "official"
+    }
+  ]
+}

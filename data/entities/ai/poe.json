@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "entity_id": "ahi-seed-poe",
+  "name": "Poe",
+  "title": "Poe",
+  "aliases": [
+    "Quora Poe"
+  ],
+  "entity_type": "ai_product",
+  "category": "multi_model_assistant",
+  "organization": "Quora",
+  "status": "active",
+  "description": "Plataforma para conversar con múltiples modelos y bots de IA.",
+  "official_url": "https://poe.com",
+  "repository_url": null,
+  "launch_date": null,
+  "current_version": null,
+  "license": null,
+  "pricing_model": null,
+  "modalities": [],
+  "capabilities": [
+    "conversation",
+    "multi_model_access"
+  ],
+  "protocols": [],
+  "source": "AHI curated seed",
+  "evidence_class": "DECLARED_OR_CURATED",
+  "verification_state": "needs_enrichment",
+  "sources": [
+    {
+      "label": "Official site",
+      "url": "https://poe.com",
+      "kind": "official"
+    }
+  ]
+}

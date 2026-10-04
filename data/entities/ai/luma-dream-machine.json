@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "entity_id": "ahi-seed-luma-dream-machine",
+  "name": "Luma Dream Machine",
+  "title": "Luma Dream Machine",
+  "aliases": [
+    "Dream Machine"
+  ],
+  "entity_type": "ai_tool",
+  "category": "video_generation",
+  "organization": "Luma AI",
+  "status": "active",
+  "description": "Herramienta de generación de video mediante IA de Luma AI.",
+  "official_url": "https://lumalabs.ai/dream-machine",
+  "repository_url": null,
+  "launch_date": null,
+  "current_version": null,
+  "license": null,
+  "pricing_model": null,
+  "modalities": [],
+  "capabilities": [
+    "video_generation"
+  ],
+  "protocols": [],
+  "source": "AHI curated seed",
+  "evidence_class": "DECLARED_OR_CURATED",
+  "verification_state": "needs_enrichment",
+  "sources": [
+    {
+      "label": "Official site",
+      "url": "https://lumalabs.ai/dream-machine",
+      "kind": "official"
+    }
+  ]
+}

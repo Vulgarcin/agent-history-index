@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "entity_id": "ahi-seed-autogen",
+  "name": "AutoGen",
+  "title": "AutoGen",
+  "aliases": [
+    "Microsoft AutoGen"
+  ],
+  "entity_type": "framework",
+  "category": "agent_framework",
+  "organization": "Microsoft",
+  "status": "active",
+  "description": "Framework para construir aplicaciones y agentes de IA.",
+  "official_url": "https://microsoft.github.io/autogen/",
+  "repository_url": null,
+  "launch_date": null,
+  "current_version": null,
+  "license": null,
+  "pricing_model": null,
+  "modalities": [],
+  "capabilities": [
+    "agents",
+    "tool_integration"
+  ],
+  "protocols": [],
+  "source": "AHI curated seed",
+  "evidence_class": "DECLARED_OR_CURATED",
+  "verification_state": "needs_enrichment",
+  "sources": [
+    {
+      "label": "Official site",
+      "url": "https://microsoft.github.io/autogen/",
+      "kind": "official"
+    }
+  ]
+}

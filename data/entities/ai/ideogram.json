@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "entity_id": "ahi-seed-ideogram",
+  "name": "Ideogram",
+  "title": "Ideogram",
+  "aliases": [
+    "Ideogram AI"
+  ],
+  "entity_type": "ai_tool",
+  "category": "image_generation",
+  "organization": "Ideogram",
+  "status": "active",
+  "description": "Herramienta de generación de imágenes mediante IA.",
+  "official_url": "https://ideogram.ai",
+  "repository_url": null,
+  "launch_date": null,
+  "current_version": null,
+  "license": null,
+  "pricing_model": null,
+  "modalities": [],
+  "capabilities": [
+    "image_generation",
+    "image_editing"
+  ],
+  "protocols": [],
+  "source": "AHI curated seed",
+  "evidence_class": "DECLARED_OR_CURATED",
+  "verification_state": "needs_enrichment",
+  "sources": [
+    {
+      "label": "Official site",
+      "url": "https://ideogram.ai",
+      "kind": "official"
+    }
+  ]
+}

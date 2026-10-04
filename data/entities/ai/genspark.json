@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "entity_id": "ahi-seed-genspark",
+  "name": "Genspark",
+  "title": "Genspark",
+  "aliases": [
+    "Genspark AI"
+  ],
+  "entity_type": "ai_product",
+  "category": "agent_platform",
+  "organization": "Genspark",
+  "status": "active",
+  "description": "Plataforma de investigación y tareas asistidas por agentes de IA.",
+  "official_url": "https://www.genspark.ai",
+  "repository_url": null,
+  "launch_date": null,
+  "current_version": null,
+  "license": null,
+  "pricing_model": null,
+  "modalities": [],
+  "capabilities": [
+    "agents",
+    "task_execution"
+  ],
+  "protocols": [],
+  "source": "AHI curated seed",
+  "evidence_class": "DECLARED_OR_CURATED",
+  "verification_state": "needs_enrichment",
+  "sources": [
+    {
+      "label": "Official site",
+      "url": "https://www.genspark.ai",
+      "kind": "official"
+    }
+  ]
+}

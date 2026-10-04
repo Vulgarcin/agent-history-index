@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "entity_id": "ahi-seed-flux",
+  "name": "FLUX",
+  "title": "FLUX",
+  "aliases": [
+    "Black Forest Labs FLUX"
+  ],
+  "entity_type": "model_family",
+  "category": "image_model",
+  "organization": "Black Forest Labs",
+  "status": "active",
+  "description": "Familia de modelos generativos de imagen de Black Forest Labs.",
+  "official_url": "https://blackforestlabs.ai",
+  "repository_url": null,
+  "launch_date": null,
+  "current_version": null,
+  "license": null,
+  "pricing_model": null,
+  "modalities": [],
+  "capabilities": [
+    "image_generation"
+  ],
+  "protocols": [],
+  "source": "AHI curated seed",
+  "evidence_class": "DECLARED_OR_CURATED",
+  "verification_state": "needs_enrichment",
+  "sources": [
+    {
+      "label": "Official site",
+      "url": "https://blackforestlabs.ai",
+      "kind": "official"
+    }
+  ]
+}

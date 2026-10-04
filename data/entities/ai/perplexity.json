@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "entity_id": "ahi-seed-perplexity",
+  "name": "Perplexity",
+  "title": "Perplexity",
+  "aliases": [
+    "Perplexity AI"
+  ],
+  "entity_type": "ai_product",
+  "category": "research_search",
+  "organization": "Perplexity AI",
+  "status": "active",
+  "description": "Motor de respuesta y búsqueda asistida por IA con fuentes.",
+  "official_url": "https://www.perplexity.ai",
+  "repository_url": null,
+  "launch_date": null,
+  "current_version": null,
+  "license": null,
+  "pricing_model": null,
+  "modalities": [],
+  "capabilities": [
+    "search",
+    "research",
+    "answering"
+  ],
+  "protocols": [],
+  "source": "AHI curated seed",
+  "evidence_class": "DECLARED_OR_CURATED",
+  "verification_state": "needs_enrichment",
+  "sources": [
+    {
+      "label": "Official site",
+      "url": "https://www.perplexity.ai",
+      "kind": "official"
+    }
+  ]
+}

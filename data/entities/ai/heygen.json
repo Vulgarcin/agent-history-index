@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "entity_id": "ahi-seed-heygen",
+  "name": "HeyGen",
+  "title": "HeyGen",
+  "aliases": [
+    "HeyGen AI"
+  ],
+  "entity_type": "ai_tool",
+  "category": "avatar_video",
+  "organization": "HeyGen",
+  "status": "active",
+  "description": "Plataforma de creación y traducción de video mediante IA.",
+  "official_url": "https://www.heygen.com",
+  "repository_url": null,
+  "launch_date": null,
+  "current_version": null,
+  "license": null,
+  "pricing_model": null,
+  "modalities": [],
+  "capabilities": [
+    "avatar_video",
+    "voice"
+  ],
+  "protocols": [],
+  "source": "AHI curated seed",
+  "evidence_class": "DECLARED_OR_CURATED",
+  "verification_state": "needs_enrichment",
+  "sources": [
+    {
+      "label": "Official site",
+      "url": "https://www.heygen.com",
+      "kind": "official"
+    }
+  ]
+}

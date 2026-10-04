@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "entity_id": "ahi-seed-grammarly",
+  "name": "Grammarly",
+  "title": "Grammarly",
+  "aliases": [
+    "Grammarly AI"
+  ],
+  "entity_type": "ai_tool",
+  "category": "writing",
+  "organization": "Grammarly",
+  "status": "active",
+  "description": "Asistencia de escritura con funciones de IA.",
+  "official_url": "https://www.grammarly.com",
+  "repository_url": null,
+  "launch_date": null,
+  "current_version": null,
+  "license": null,
+  "pricing_model": null,
+  "modalities": [],
+  "capabilities": [
+    "writing",
+    "editing"
+  ],
+  "protocols": [],
+  "source": "AHI curated seed",
+  "evidence_class": "DECLARED_OR_CURATED",
+  "verification_state": "needs_enrichment",
+  "sources": [
+    {
+      "label": "Official site",
+      "url": "https://www.grammarly.com",
+      "kind": "official"
+    }
+  ]
+}

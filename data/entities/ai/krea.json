@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "entity_id": "ahi-seed-krea",
+  "name": "Krea AI",
+  "title": "Krea AI",
+  "aliases": [
+    "Krea"
+  ],
+  "entity_type": "ai_tool",
+  "category": "image_generation",
+  "organization": "Krea",
+  "status": "active",
+  "description": "Plataforma creativa de generación y edición visual con IA.",
+  "official_url": "https://www.krea.ai",
+  "repository_url": null,
+  "launch_date": null,
+  "current_version": null,
+  "license": null,
+  "pricing_model": null,
+  "modalities": [],
+  "capabilities": [
+    "image_generation",
+    "image_editing"
+  ],
+  "protocols": [],
+  "source": "AHI curated seed",
+  "evidence_class": "DECLARED_OR_CURATED",
+  "verification_state": "needs_enrichment",
+  "sources": [
+    {
+      "label": "Official site",
+      "url": "https://www.krea.ai",
+      "kind": "official"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "entity_id": "ahi-seed-stable-diffusion",
+  "name": "Stable Diffusion",
+  "title": "Stable Diffusion",
+  "aliases": [
+    "Stability AI Stable Diffusion"
+  ],
+  "entity_type": "model_family",
+  "category": "image_model",
+  "organization": "Stability AI",
+  "status": "active",
+  "description": "Familia de modelos generativos de imagen de Stability AI.",
+  "official_url": "https://stability.ai",
+  "repository_url": null,
+  "launch_date": null,
+  "current_version": null,
+  "license": null,
+  "pricing_model": null,
+  "modalities": [],
+  "capabilities": [
+    "image_generation"
+  ],
+  "protocols": [],
+  "source": "AHI curated seed",
+  "evidence_class": "DECLARED_OR_CURATED",
+  "verification_state": "needs_enrichment",
+  "sources": [
+    {
+      "label": "Official site",
+      "url": "https://stability.ai",
+      "kind": "official"
+    }
+  ]
+}

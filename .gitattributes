@@ -1,0 +1,7 @@
+# Evidence byte hashes must survive Windows/Linux checkouts unchanged.
+data/snapshots/** -text
+data/changes/** -text
+data/evidence/** -text
+data/checkpoints/** -text
+data/corrections/** -text
+data/events.csv -text

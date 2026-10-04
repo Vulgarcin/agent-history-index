@@ -52,11 +52,12 @@ jobs:
         run: |
           python security_self_test.py
           python security_pipeline_test.py
+          python integrity_recovery_test.py
 
       - name: Reject symlinks in generated evidence
         shell: bash
         run: |
-          if find data/snapshots data/changes data/evidence data/checkpoints data/public web/data -type l -print -quit | grep -q .; then
+          if find data/snapshots data/changes data/evidence data/checkpoints data/corrections data/public web/data -type l -print -quit | grep -q .; then
             echo "Symlink found in generated evidence; refusing to commit."
             exit 1
           fi
@@ -70,7 +71,7 @@ jobs:
           git config --local core.hooksPath /dev/null
           git config --local user.name "agent-history-index-bot"
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/snapshots data/changes data/evidence data/checkpoints data/public web/data
+          git add data/snapshots data/changes data/evidence data/checkpoints data/corrections data/public web/data
           if git diff --cached --quiet; then
             echo "No generated changes to commit."
             exit 0

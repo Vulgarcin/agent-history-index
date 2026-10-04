@@ -1,0 +1,70 @@
+{
+  "schema_version": "1",
+  "correction_type": "verified_crlf_to_lf",
+  "explanation": "Git normalized Windows CRLF bytes to LF before immutability enforcement. Both byte hashes remain in the unchanged ledger. Verification reconstructs CRLF bytes and requires the exact original hash; no event or snapshot is invented.",
+  "artifacts": [
+    {
+      "artifact_path": "data/snapshots/mcp-registry-2026-09-24.json",
+      "original_sha256": "2f80690d3f324528fb13a560f3a5e6cd75e3b5b8d94f6fdd90b372a371f021bc",
+      "normalized_sha256": "b81cdb1a7773146be12b601c2603d5be55199a770035f114322c9339a3b432aa",
+      "original_entry_hash": "4c3c7749848ec1577a2d159ed45f691f1413ee4c7d0fb6b514f67ecaf0a76367",
+      "normalized_entry_hash": "043b2d6f4cf0cced5d9dee6534e0ab88d1b8adb266caf319cc303d7d0ac4348a"
+    },
+    {
+      "artifact_path": "data/snapshots/mcp-registry-2026-09-26.json",
+      "original_sha256": "e9463bea390f06f148db10ff170fd790cb888dc39347d51dcd16d54904f1adef",
+      "normalized_sha256": "1ae56a429cbdf6e150fa2560f0670b9997e6827248a7f470e3558457c26faa65",
+      "original_entry_hash": "7912737962883190ea7a6205ada30ec6fbb3b295ce3a8ca40f4e1113c82cf9e2",
+      "normalized_entry_hash": "0fa9ad19cf30f7af8bb6856e81e37dbb472e91b92fd03f239fb6c2d4e503b15b"
+    },
+    {
+      "artifact_path": "data/snapshots/mcp-registry-2026-09-27.json",
+      "original_sha256": "56343d19b949a9c165dd89021caa9dbb9b71c108dc5a7cf05d6af48eea612fa8",
+      "normalized_sha256": "3622f1b751219fafbb1504b420eb19987fce98f9a446abec10aab0a1d65a9c46",
+      "original_entry_hash": "d76487d5d3c9f215145e41260ba91ae38e80be6ae775cef8fefdf65efad4b0ed",
+      "normalized_entry_hash": "4e722d075ef86f9679f69a7b837a45aa24b555d1e1a4965982ef064e4ed45cc2"
+    },
+    {
+      "artifact_path": "data/snapshots/mcp-registry-2026-09-30.json",
+      "original_sha256": "2e429ebffdd84c4d50a36f65b598fd41604771332f6e05c33ee770a999809936",
+      "normalized_sha256": "ee00a206e3ca0d356ecfdb0dfa5f657c23ecf3656f77f680dde584313845c246",
+      "original_entry_hash": "a946172308f5b33ee25897a78a81fbeed9cc83a782d7204177a4dd843f6edcca",
+      "normalized_entry_hash": "20f96d774c79c28d6eac12a00679c3c1694ea0591024e0a15d60cabf9934ecef"
+    },
+    {
+      "artifact_path": "data/changes/changes-2026-09-23.json",
+      "original_sha256": "46fc35d180cd74ac24965298524596f904644e7d2f83a7a0d1ba922951ccfd87",
+      "normalized_sha256": "656f0f018675abae44b62e58b2b0e3e12524bbbe700f71ca5f5af91c4f5f2399",
+      "original_entry_hash": "852ee19d20ffee7533b915cb122e8345927a77d0cd60f50b12cea115cc8f0919",
+      "normalized_entry_hash": "4d16020f1563eb5d5632debee883255792c69ce81fb43f570230ff60fc04c6bf"
+    },
+    {
+      "artifact_path": "data/changes/changes-2026-09-24.json",
+      "original_sha256": "11da268b15eabd59c15abde270ce5e9665b92b40237ba06e549343db2599caab",
+      "normalized_sha256": "f9ccbda71ed79357a113748afcb9fef123174b76029fb3428740b23370267c8e",
+      "original_entry_hash": "a5d0b0638b4055e67f9537613ed498810e3580bea2ad31efd3513ea067bfb66a",
+      "normalized_entry_hash": "77fe10c4405690a8d64ead847d4af55143237c0f88870fa3835104dfad4d4954"
+    },
+    {
+      "artifact_path": "data/changes/changes-2026-09-26.json",
+      "original_sha256": "ecaf9d42a6647114129ebcab6451d8f894842d1223dbbe7427d781e90dd06c40",
+      "normalized_sha256": "c8bfa04335a3cb8783759080f9f128701b01b0179339b6db5a4ecc6d768cd659",
+      "original_entry_hash": "714c318463b71bb0e8c9ea50c145a6f81429fdf52bbbe07be332ab3fb8ce2cd1",
+      "normalized_entry_hash": "7393a0b50f31849cf93ff5c2fdcad3f860ad39459ffeb739cb42c5a3ff74d3cf"
+    },
+    {
+      "artifact_path": "data/changes/changes-2026-09-27.json",
+      "original_sha256": "9aa49ad1bf4c31717490d5e39d9fe1a471e897c767fdb8016d8f3db5c1178899",
+      "normalized_sha256": "10cf36b2ece3891f7f48db5457c9010e105e0556a9d5a011098a9af5a04d5908",
+      "original_entry_hash": "7c2bbd9ac4bc649082aa8dc23bbb36ed5e91d25373d1e0e8d7ed85119578c041",
+      "normalized_entry_hash": "402bc411d0d49f77cfd8626dc139cc350e7d4e8c712bd0ea983d1d9201a14712"
+    },
+    {
+      "artifact_path": "data/changes/changes-2026-09-30.json",
+      "original_sha256": "dbf8c45a4fd3ea505fb801bea808b885a25c4297e6a356f2dd7ea65d3be58226",
+      "normalized_sha256": "fe85ebdbb018a6a0fd22fa87cd4c2871451316a8c9b9b2a120fdf501624fbe68",
+      "original_entry_hash": "1ffbaefb9fd47b1afb442cb438f7205d8c29528f2af99f2c38ccac75f2b01350",
+      "normalized_entry_hash": "ec3cd2cc7500cd88560a66dcb69dc0f3aada07c117281b06c25d79258cf8f411"
+    }
+  ]
+}

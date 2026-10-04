@@ -1,0 +1,61 @@
+name: Publish AHI Website
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Daily AHI Evidence Capture", "AHI External Backfill (Manual)"]
+    types: [completed]
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ahi-pages
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Validate public files
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path("web")
+          for name in ("index.html", "app.js", "styles.css"):
+              assert (root / name).is_file(), name
+          for name in ("status", "catalog", "history", "market"):
+              with (root / "data" / f"{name}.json").open() as f:
+                  value = json.load(f)
+              assert isinstance(value, dict), name
+          assert not any(p.is_symlink() for p in root.rglob("*")), "Public symlink"
+          Path("_site/data").mkdir(parents=True)
+          import shutil
+          for name in ("index.html", "app.js", "styles.css"):
+              shutil.copyfile(root / name, Path("_site") / name)
+          for name in ("status", "catalog", "history", "market"):
+              shutil.copyfile(root / "data" / f"{name}.json", Path("_site/data") / f"{name}.json")
+          Path("_site/.nojekyll").touch()
+          PY
+      - uses: actions/configure-pages@v6.0.0
+      - uses: actions/upload-pages-artifact@v5.0.0
+        with:
+          path: _site
+      - name: Publish website
+        id: deployment
+        uses: actions/deploy-pages@v5.0.1

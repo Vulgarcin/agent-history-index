@@ -14,9 +14,9 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
 LEDGER = DATA / "evidence" / "ledger.jsonl"
 CHECKPOINT_DIR = DATA / "checkpoints"
-TRACK_DIRS = (DATA / "snapshots", DATA / "changes")
+TRACK_DIRS = (DATA / "snapshots", DATA / "changes", DATA / "corrections")
 EVENTS = DATA / "events.csv"
-IMMUTABLE_PREFIXES = ("data/snapshots/", "data/changes/", "data/events.csv#event:")
+IMMUTABLE_PREFIXES = ("data/snapshots/", "data/changes/", "data/corrections/", "data/events.csv#event:")
 ZERO_HASH = "0" * 64
 MAX_LEDGER_BYTES = 128 * 1024 * 1024
 MAX_EVENTS_BYTES = 10 * 1024 * 1024
@@ -113,8 +113,38 @@ def immutable_history(entries: list[dict]) -> dict[str, str]:
             continue
         previous = history.setdefault(rel, digest)
         if previous != digest:
-            raise RuntimeError(f"Ledger contains conflicting hashes for immutable evidence: {rel}")
+            if not verified_legacy_line_endings(rel, previous, digest, entries):
+                raise RuntimeError(f"Ledger contains conflicting hashes for immutable evidence: {rel}")
+            history[rel] = digest
     return history
+
+
+def verified_legacy_line_endings(rel: str, original: str, normalized: str, entries: list[dict]) -> bool:
+    """Accept only documented legacy byte transitions, proved against both ledger hashes."""
+    manifest = DATA / "corrections" / "legacy-line-endings-2026-10-04.json"
+    if not manifest.is_file() or manifest.is_symlink() or manifest.stat().st_size > 32_768:
+        return False
+    try:
+        correction = json.loads(manifest.read_text(encoding="utf-8"))
+        if correction.get("correction_type") != "verified_crlf_to_lf":
+            return False
+        rows = correction.get("artifacts", [])
+        matches = [r for r in rows if r.get("artifact_path") == rel]
+        if len(matches) != 1:
+            return False
+        row = matches[0]
+        if (original, normalized) != (row["original_sha256"], row["normalized_sha256"]):
+            return False
+        versions = [e for e in entries if e.get("artifact_path") == rel]
+        if len(versions) != 2 or [e.get("entry_hash") for e in versions] != [row["original_entry_hash"], row["normalized_entry_hash"]]:
+            return False
+        path = ROOT / rel
+        if not rel.startswith(("data/snapshots/", "data/changes/")) or path.is_symlink():
+            return False
+        raw = path.read_bytes()
+        return b"\r" not in raw and sha256_bytes(raw) == normalized and sha256_bytes(raw.replace(b"\n", b"\r\n")) == original
+    except (OSError, ValueError, KeyError, TypeError, AttributeError):
+        return False
 
 
 def assert_no_historical_mutation_or_deletion(entries: list[dict], current: dict[str, str]) -> None:

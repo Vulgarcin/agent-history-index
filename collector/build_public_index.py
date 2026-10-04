@@ -897,6 +897,57 @@ def build_history_products(catalog: dict, checkpoint: dict | None, evidence_inde
     return pro, market
 
 
+def write_public_product(path: Path, product: dict, limit: int = 8 * 1024 * 1024) -> None:
+    """Write bounded, content-addressed entity shards; retain earlier shards."""
+    raw = json.dumps(product, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    if len(raw) <= limit:
+        path.write_bytes(raw)
+        return
+    entities = product.get("entities")
+    if not isinstance(entities, (dict, list)):
+        raise RuntimeError(f"Oversized product cannot be split: {path}")
+    chunk_dir = path.parent / "chunks"
+    chunk_dir.mkdir(exist_ok=True)
+    parts = []
+    batch = {} if isinstance(entities, dict) else []
+    size = 32
+    def flush():
+        nonlocal batch, size
+        if not batch:
+            return
+        content = json.dumps({"entities": batch}, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
+        if len(content) > limit:
+            raise RuntimeError("Entity shard exceeds byte limit")
+        digest = hashlib.sha256(content).hexdigest()
+        target = chunk_dir / f"{digest}.json"
+        if target.exists() and target.read_bytes() != content:
+            raise RuntimeError("Existing content-addressed shard mismatch")
+        if not target.exists():
+            target.write_bytes(content)
+        parts.append({"path": f"chunks/{digest}.json", "sha256": digest, "bytes": len(content)})
+        batch = {} if isinstance(entities, dict) else []
+        size = 32
+    rows = entities.items() if isinstance(entities, dict) else enumerate(entities)
+    for key, value in rows:
+        item = {key: value} if isinstance(entities, dict) else [value]
+        count = len(json.dumps(item, ensure_ascii=False, separators=(",", ":")).encode("utf-8")) + 2
+        if size + count > limit:
+            flush()
+        if isinstance(batch, dict):
+            batch[key] = value
+        else:
+            batch.append(value)
+        size += count
+    flush()
+    manifest = {k: v for k, v in product.items() if k != "entities"}
+    manifest.update({"storage_format": "ahi-entity-shards-v1", "entity_container": "dict" if isinstance(entities, dict) else "list", "parts": parts})
+    encoded = json.dumps(manifest, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
+    if len(encoded) > limit:
+        raise RuntimeError("Public manifest exceeds byte limit")
+    path.write_bytes(encoded)
+
+
 def main():
     snapshot_paths = sorted(
         [p for p in (DATA/"snapshots").glob("mcp-registry-*.json") if SNAP_RE.match(p.name)],
@@ -938,18 +989,13 @@ def main():
     rendered=json.dumps(payload, indent=2, ensure_ascii=False)
     OUT.write_text(rendered, encoding="utf-8")
     WEB_OUT.write_text(rendered, encoding="utf-8")
-    catalog_rendered=json.dumps(catalog, ensure_ascii=False, separators=(",",":"))
-    CATALOG_OUT.write_text(catalog_rendered, encoding="utf-8")
-    WEB_CATALOG_OUT.write_text(catalog_rendered, encoding="utf-8")
+    for target in (CATALOG_OUT, WEB_CATALOG_OUT):
+        write_public_product(target, catalog)
     pro, market = build_history_products(catalog, checkpoint, evidence_index, external_by_entity)
-    pro_rendered=json.dumps(pro, ensure_ascii=False, separators=(",",":"))
-    market_rendered=json.dumps(market, ensure_ascii=False, separators=(",",":"))
-    PRO_OUT.write_text(pro_rendered, encoding="utf-8")
-    WEB_PRO_OUT.write_text(pro_rendered, encoding="utf-8")
-    HISTORY_OUT.write_text(pro_rendered, encoding="utf-8")
-    WEB_HISTORY_OUT.write_text(pro_rendered, encoding="utf-8")
-    MARKET_OUT.write_text(market_rendered, encoding="utf-8")
-    WEB_MARKET_OUT.write_text(market_rendered, encoding="utf-8")
+    for target in (PRO_OUT, WEB_PRO_OUT, HISTORY_OUT, WEB_HISTORY_OUT):
+        write_public_product(target, pro)
+    for target in (MARKET_OUT, WEB_MARKET_OUT):
+        write_public_product(target, market)
     print(f"Public status written to {OUT} and {WEB_OUT}")
     print(f"Public catalog written to {CATALOG_OUT} and {WEB_CATALOG_OUT} ({catalog['entity_count']} entities)")
     print(f"Historical entity index written to {HISTORY_OUT} and {WEB_HISTORY_OUT} ({len(pro['entities'])} entities)")

@@ -2,6 +2,9 @@ name: Daily AHI Evidence Capture
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["collector/**", ".github/workflows/daily-collector.yaml", "public_shards_test.py"]
   schedule:
     - cron: "23 7 * * *"
 
@@ -53,6 +56,7 @@ jobs:
           python security_self_test.py
           python security_pipeline_test.py
           python integrity_recovery_test.py
+          python public_shards_test.py
 
       - name: Reject symlinks in generated evidence
         shell: bash

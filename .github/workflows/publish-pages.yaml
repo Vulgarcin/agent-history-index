@@ -2,6 +2,9 @@ name: Publish AHI Website
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["web/**", "collector/build_public_index.py", ".github/workflows/publish-pages.yaml"]
   workflow_run:
     workflows: ["Daily AHI Evidence Capture", "AHI External Backfill (Manual)"]
     types: [completed]
@@ -31,6 +34,11 @@ jobs:
         with:
           ref: main
           persist-credentials: false
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: "3.13"
+      - name: Generate bounded public products
+        run: python collector/build_public_index.py
       - name: Validate public files
         run: |
           python - <<'PY'
@@ -50,6 +58,8 @@ jobs:
               shutil.copyfile(root / name, Path("_site") / name)
           for name in ("status", "catalog", "history", "market"):
               shutil.copyfile(root / "data" / f"{name}.json", Path("_site/data") / f"{name}.json")
+          if (root / "data/chunks").exists():
+              shutil.copytree(root / "data/chunks", "_site/data/chunks")
           Path("_site/.nojekyll").touch()
           PY
       - uses: actions/configure-pages@v6.0.0

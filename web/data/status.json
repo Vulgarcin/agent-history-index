@@ -1,23 +1,23 @@
 {
-  "generated_at": "2026-10-20T08:00:27.192886+00:00",
+  "generated_at": "2026-10-21T13:07:04.278713+00:00",
   "latest_snapshot": {
-    "date": "2026-10-20T08:00:22.097718+00:00",
-    "records": 46803,
-    "file": "mcp-registry-2026-10-20.json"
+    "date": "2026-10-21T13:07:00.198632+00:00",
+    "records": 47613,
+    "file": "mcp-registry-2026-10-21.json"
   },
   "latest_changes": {
-    "old_records": 46151,
-    "new_records": 46803,
-    "added": 661,
-    "removed": 9,
-    "version_changes": 958,
-    "status_changes": 9,
-    "content_changes": 966
+    "old_records": 46803,
+    "new_records": 47613,
+    "added": 816,
+    "removed": 6,
+    "version_changes": 1125,
+    "status_changes": 4,
+    "content_changes": 1128
   },
   "global_integrity_anchor": {
-    "tree_size": 68,
-    "merkle_root_sha256": "d57f784195d5b15e5269a5de30b7af33ea9731f2f14da4c645a5dce44d6c62f2",
-    "checkpoint": "checkpoint-2026-10-20T080026570057Z.json",
+    "tree_size": 70,
+    "merkle_root_sha256": "de867004f90083f135a7cbd3a9cc9c7ab31e20e003f8e6f9dd2add4f2f364ad0",
+    "checkpoint": "checkpoint-2026-10-21T130703695957Z.json",
     "signed": false
   },
   "principles": {

@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.1",
+  "generated_at": "2026-11-18T16:40:21.133054+00:00",
+  "tree_size": 126,
+  "merkle_root_sha256": "e1f45ef47919e703fc3af836595dfab67f4d0fe33e3aabc32dfe741eb6cb4772",
+  "latest_entry_hash": "cf1cd19fc5572c4dbc46564020d0673d977d39b17ed063831eb39b5b7718248c",
+  "new_entries": 2,
+  "previous_checkpoint_sha256": "a9ddb89b97099565c0225db863a1ee373b81bb330805f27898a88d38a38662fd",
+  "repository_commit": "9e191fbee141c9cd8d64a09487dad69380e81510",
+  "workflow_run_id": "44347869780"
+}
